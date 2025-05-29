@@ -32,7 +32,7 @@
         android:layout_marginStart="155dp"
         android:layout_marginEnd="156dp"
         android:layout_marginBottom="75dp"
-        android:text="Seja bem-vindo!"
+        android:text="@string/seja_bem_vindo"
         android:textColor="@color/azul"
         android:textSize="34sp"
         android:textStyle="bold"
