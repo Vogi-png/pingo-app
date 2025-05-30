@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="azul">#5162E6</color>
+    <color name="branco">#F0F4FE</color>
+    <color name="cinza">#B5B5B5</color>
+    <color name="azulClaro">#A7C1EB</color>
+    <color name="azulMedio1">#759CDB</color>
+    <color name="azulMedio2">#96ADFF</color>
+    <color name="azulEscuro">#5162E6</color>
+    <color name="preto">#1E1E1E</color>
 
 </resources>
