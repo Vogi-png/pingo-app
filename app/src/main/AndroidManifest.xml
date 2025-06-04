@@ -13,6 +13,12 @@
         android:theme="@style/Theme.TaskApp"
         tools:targetApi="31">
         <activity
+            android:name=".PinguSkin"
+            android:exported="false" />
+        <activity
+            android:name=".PinguHome"
+            android:exported="false" />
+        <activity
             android:name=".NomearPingo"
             android:exported="false" />
         <activity
