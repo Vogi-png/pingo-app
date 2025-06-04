@@ -10,7 +10,7 @@
     <ImageView android:id="@+id/headerImage"
         android:layout_width="0dp"
         android:layout_height="230dp"
-        android:src="@drawable/header_princ"
+        android:src="@drawable/header_prin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
