@@ -13,7 +13,19 @@
         android:theme="@style/Theme.TaskApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".CadastrarCartao"
+            android:exported="false" />
+        <activity
+            android:name=".TodosCartoes"
+            android:exported="false" />
+        <activity
+            android:name=".PaginaPlano"
+            android:exported="false" />
+        <activity
+            android:name=".pagina_plano"
+            android:exported="false" />
+        <activity
+            android:name=".PaginaUsuario"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
