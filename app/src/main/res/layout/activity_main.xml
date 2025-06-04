@@ -5,14 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     android:orientation="horizontal"
-    tools:context=".MainActivity">
-</LinearLayout>
-=======
     android:background="@color/white"
-    tools:context=".MainActivity">
-
+    tools:context=".MainActivity" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -45,5 +40,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> gabriel_2
+
+</LinearLayout>
