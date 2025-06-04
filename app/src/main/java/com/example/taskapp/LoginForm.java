@@ -16,8 +16,8 @@ public class LoginForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
 
+        //Ir para a tela de Cadastro
         TextView tvNaoPossuiCadastro = findViewById(R.id.id_redirectCadastro);
-
         tvNaoPossuiCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,6 +26,15 @@ public class LoginForm extends AppCompatActivity {
             }
         });
 
-        // O restante do seu código (configuração do botão de login)
+        //Ir para a tela de escolher o nome do pingo (sem verificação de input ainda)
+        Button btnLogin = findViewById(R.id.id_confirmLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginForm.this, NomearPingo.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
