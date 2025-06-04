@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.todo.pingo"
+    namespace = "com.example.taskapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.todo.pingo"
+        applicationId = "com.example.taskapp"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

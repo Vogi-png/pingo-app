@@ -1,15 +1,16 @@
-package com.todo.pingo;
+package com.example.taskapp;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.taskapp.R;
 
 public class TelaInicio extends AppCompatActivity {
 
@@ -31,6 +32,6 @@ public class TelaInicio extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },3000);
+        }, 3000);
     }
 }

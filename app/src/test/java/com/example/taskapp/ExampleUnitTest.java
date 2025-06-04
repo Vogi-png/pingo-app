@@ -1,4 +1,4 @@
-package com.todo.pingo;
+package com.example.taskapp;
 
 import org.junit.Test;
 

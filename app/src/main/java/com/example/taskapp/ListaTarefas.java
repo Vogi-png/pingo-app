@@ -1,13 +1,12 @@
-package com.todo.pingo;
+package com.example.taskapp;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.todo.pingo.databinding.ActivityListaTarefasBinding;
-import com.todo.pingo.ui.dashboard.DashboardFragment;
-import com.todo.pingo.ui.home.HomeFragment;
-import com.todo.pingo.ui.notifications.NotificationsFragment;
+import com.example.taskapp.databinding.ActivityListaTarefasBinding;
+import com.example.taskapp.ui.home.HomeFragment;
+import com.example.taskapp.R;
+
 
 public class ListaTarefas extends AppCompatActivity {
 
