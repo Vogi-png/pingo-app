@@ -13,26 +13,48 @@
         android:theme="@style/Theme.TaskApp"
         tools:targetApi="31">
         <activity
-            android:name=".NomearPingo"
+            android:name=".MainActivity"
             android:exported="false" />
+
         <activity
-            android:name=".LoginForm"
+            android:name=".TelaInicio"
+            android:exported="true">  <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".CadastrarCartao"
             android:exported="false" />
+
         <activity
             android:name=".CadastroForm"
             android:exported="false" />
+
+        <activity
+            android:name=".LoginForm"
+            android:exported="false" />
+
+        <activity
+            android:name=".NomearPingo"
+            android:exported="false" />
+
+        <activity
+            android:name=".PaginaPlano"
+            android:exported="false" />
+
         <activity
             android:name=".PaginaSobre"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".PaginaUsuario"
+            android:exported="false" />
+
+        <activity
+            android:name=".TodosCartoes"
+            android:exported="false" />
     </application>
 
 </manifest>
