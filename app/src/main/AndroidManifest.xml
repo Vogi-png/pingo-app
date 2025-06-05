@@ -18,11 +18,15 @@
             android:label="@string/title_activity_base"
             android:theme="@style/Theme.PingoToDoList" />
         <activity
-            android:name=".NomearPingo"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".LoginForm"
             android:exported="true" />
+        <activity
+            android:name=".CadastrarCartao"
+            android:exported="false" />
+
         <activity
             android:name=".CadastroForm"
             android:exported="false" />
@@ -43,8 +47,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+            android:name=".NomearPingo"
+            android:exported="false" />
+
+        <activity
+            android:name=".PaginaPlano"
+            android:exported="false" />
+
+        <activity
+            android:name=".PaginaSobre"
+            android:exported="false" />
+
+        <activity
+            android:name=".PaginaUsuario"
+            android:exported="false" />
+
+        <activity
+            android:name=".TodosCartoes"
+            android:exported="false" />
     </application>
 
 </manifest>
