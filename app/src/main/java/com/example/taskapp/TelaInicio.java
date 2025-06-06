@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.taskapp.R;
+
 public class TelaInicio extends AppCompatActivity {
 
     @Override
@@ -23,10 +25,13 @@ public class TelaInicio extends AppCompatActivity {
             return insets;
         });
 
-        new Handler().postDelayed(() -> {
-            Intent intent = new Intent(TelaInicio.this, LoginForm.class);
-            startActivity(intent);
-            finish();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(TelaInicio.this, ListaTarefas.class);
+                startActivity(intent);
+                finish();
+            }
         }, 3000);
     }
 }
