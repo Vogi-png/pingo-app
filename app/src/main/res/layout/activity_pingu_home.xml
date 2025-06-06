@@ -16,36 +16,33 @@
         <!-- Pinguim -->
 
         <ImageView
-            android:id="@+id/headerLogoHome"
-            android:layout_width="438dp"
-            android:layout_height="168dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="-5dp"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.518"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/header_default" />
-
-        <ImageView
             android:id="@+id/pinguImageHome"
             android:layout_width="274dp"
             android:layout_height="270dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="34dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerLogoHome"
+            app:layout_constraintTop_toBottomOf="@+id/headerLogo3"
             app:srcCompat="@drawable/imagem_pingo" />
 
         <!-- Nome do Pinguim -->
+        <ImageView
+            android:id="@+id/headerLogo3"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/pinguNameHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Pingo da Silva"
-            android:textColor="@color/azulEscuro"
+            android:textColor="@color/cinza"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,9 +55,10 @@
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#96ADFF"
+            android:backgroundTint="#5F8DF6"
+            android:paddingLeft="35dp"
             android:text="Personalizar"
-            android:textColor="#40465D"
+            android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,11 +66,12 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="25dp"
-            android:layout_height="26dp"
+            android:layout_width="20dp"
+            android:layout_height="23dp"
             android:layout_marginStart="-125dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="14dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnPersonalizar"
             app:srcCompat="@drawable/camiseta_icon" />
