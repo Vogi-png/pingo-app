@@ -20,21 +20,12 @@ public class CadastroForm extends AppCompatActivity {
 
         ImageView voltarBtn = findViewById(R.id.voltarBtn);
 
-        //Voltar para a tela de Login
-        voltarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CadastroForm.this, LoginForm.class);
-                startActivity(intent);
-            }
-        });
-
         //Ir para a tela de escolher o nome do pingo (sem verificação de input ainda)
         Button btnCadastrar = findViewById(R.id.button_cadastrar);
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CadastroForm.this, NomearPingo.class);
+                Intent intent = new Intent(CadastroForm.this, LoginForm.class);
                 startActivity(intent);
             }
         });

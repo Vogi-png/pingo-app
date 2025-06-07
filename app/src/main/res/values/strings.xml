@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pingo-To-Do-List</string>
+    <string name="app_name">Pingo.</string>
     <string name="seja_bem_vindo">Seja Bem-Vindo!</string>
     <string name="sobretext">\tPingo é uma fantástica lista de tarefas que te ajuda trazendo elementos de jogos aos seus afazeres diários. Programe-se, adicione lembretes e organize sua vida com um sistema de habilidades, atributos e níveis.\n\n\tTransforme suas tarefas em um jogo com nosso planejador de produtividade, você ganha uma cópia virtual de si mesmo, podendo acompanhar suas habilidades, características e ver estatísticas. Toda tarefa feita ou não vai determinar a emoção de seu Pingo no momento. Ao realizar essa tarefa na vida real, você recebera dinheiro virtual como recompensa além de permanecer com sua ofensiva.</string>
     <string name="pingo_logo">pingo Logo</string>
