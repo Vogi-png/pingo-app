@@ -55,10 +55,6 @@
             android:exported="false" />
 
         <activity
-            android:name=".PaginaSobre"
-            android:exported="false" />
-
-        <activity
             android:name=".PaginaUsuario"
             android:exported="false" />
 
