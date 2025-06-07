@@ -59,6 +59,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.TrocarTema"
+            android:exported="false" />
+
+        <activity
             android:name=".TodosCartoes"
             android:exported="false" />
     </application>
