@@ -58,6 +58,10 @@ xmlns:tools="http://schemas.android.com/tools">
         android:exported="false" />
 
     <activity
+        android:name=".ui.TrocarTema"
+        android:exported="true" />
+
+    <activity
         android:name="com.example.taskapp.CriarTarefa"
         android:exported="false" />
 </application>
