@@ -55,11 +55,11 @@
             android:exported="false" />
 
         <activity
-            android:name=".PaginaSobre"
+            android:name=".PaginaUsuario"
             android:exported="false" />
 
         <activity
-            android:name=".PaginaUsuario"
+            android:name=".ui.TrocarTema"
             android:exported="false" />
 
         <activity
