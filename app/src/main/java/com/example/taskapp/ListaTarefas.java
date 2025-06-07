@@ -12,6 +12,8 @@ public class ListaTarefas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //barra de navegacao
         binding = ActivityListaTarefasBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -21,7 +23,7 @@ public class ListaTarefas extends AppCompatActivity {
             int itemId = item.getItemId();
 
             if (itemId == R.id.navigation_home) {
-                startActivity(new Intent(this, CadastroForm.class)); //mudar para PaginaUsuario
+                startActivity(new Intent(this, PaginaUsuario.class));
                 return true;
             } else if (itemId == R.id.navigation_dashboard) {
                 // Já está na tela ListaTarefas, não faz nada
@@ -39,5 +41,11 @@ public class ListaTarefas extends AppCompatActivity {
 
             return false;
         });
+
+        //criar tarefa
+        binding.botaomais.setOnClickListener(v -> {
+            startActivity(new Intent(this, CriarTarefa.class));
+        });
+
     }
 }

@@ -11,6 +11,7 @@
 
     <item
         android:id="@+id/navigation_centro"
+        android:icon="@drawable/nav_mais"
         android:title="" />
 
     <item

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- barra de navegação -->
     <FrameLayout
         android:id="@+id/flFragment"
         android:layout_width="match_parent"
@@ -34,5 +35,6 @@
         app:layout_anchor="@id/bottomNavigationView"
         app:labelVisibilityMode="labeled"
         app:layout_anchorGravity="center" />
+    <!-- Fim da barra de navegação -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
