@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CriarTarefa">
+
+  <!-- Imagem topo -->
+  <ImageView
+      android:id="@+id/imageViewHeader"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:adjustViewBounds="true"
+      android:scaleType="fitXY"
+      android:src="@drawable/header_criar_tarefa"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <!-- Label Título -->
+  <TextView
+      android:id="@+id/tvTituloLabel"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="40dp"
+      android:layout_marginTop="24dp"
+      android:layout_marginEnd="32dp"
+      android:text="Título"
+      android:textColor="#1D275C"
+      android:textSize="17sp"
+      app:layout_constraintTop_toBottomOf="@id/imageViewHeader"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <!-- Card Título -->
+  <androidx.cardview.widget.CardView
+      android:id="@+id/tituloCardView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="32dp"
+      app:cardBackgroundColor="@android:color/transparent"
+      app:cardCornerRadius="25dp"
+      app:cardElevation="4dp"
+      app:layout_constraintTop_toBottomOf="@id/tvTituloLabel"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
+
+    <EditText
+        android:id="@+id/editTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/insert_border_select"
+        android:hint="Título da Tarefa"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textSize="15sp" />
+  </androidx.cardview.widget.CardView>
+
+  <!-- Label Descrição -->
+  <TextView
+      android:id="@+id/tvDescricaoLabel"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="40dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="32dp"
+      android:text="Descrição"
+      android:textColor="#1D275C"
+      android:textSize="17sp"
+      app:layout_constraintTop_toBottomOf="@id/tituloCardView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <!-- Card Descrição -->
+  <androidx.cardview.widget.CardView
+      android:id="@+id/descricaoCardView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="32dp"
+      app:cardBackgroundColor="@android:color/transparent"
+      app:cardCornerRadius="20dp"
+      app:cardElevation="4dp"
+      app:layout_constraintTop_toBottomOf="@id/tvDescricaoLabel"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
+
+    <EditText
+        android:id="@+id/editDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/insert_border_select"
+        android:gravity="top"
+        android:hint="Descrição..."
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="16dp"
+        android:textSize="15sp" />
+  </androidx.cardview.widget.CardView>
+
+  <!-- Botão salvar -->
+  <Button
+      android:id="@+id/btnSalvar"
+      android:layout_width="252dp"
+      android:layout_height="56dp"
+      android:layout_marginTop="24dp"
+      android:backgroundTint="#96ADFF"
+      android:text="Salvar"
+      android:textColor="#40465D"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      app:layout_constraintTop_toBottomOf="@id/descricaoCardView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <!-- Imagem pingoa -->
+  <ImageView
+      android:id="@+id/header_pingo"
+      android:layout_width="230dp"
+      android:layout_height="190dp"
+      android:layout_marginTop="24dp"
+      android:adjustViewBounds="true"
+      android:scaleType="fitStart"
+      android:src="@drawable/header_pingo"
+      app:layout_constraintTop_toBottomOf="@id/btnSalvar"
+      app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <FrameLayout
+      android:id="@+id/flFragment"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintTop_toBottomOf="@id/header_pingo"
+      app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <!-- Barra de tarefas -->
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+      android:id="@+id/bottomNavigationView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:background="@color/azul_pingo"
+      app:menu="@menu/bottom_nav_menu"
+      app:labelVisibilityMode="labeled"
+      app:itemHorizontalTranslationEnabled="false"
+      app:itemIconTint="@android:color/white"
+      app:itemTextColor="@android:color/white"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/botaomais"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="-35dp"
+      android:src="@drawable/nav_mais"
+      android:backgroundTint="@color/botao_mais"
+      app:tint="@color/white"
+      app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

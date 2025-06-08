@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TaskApp"
+rootProject.name = "Pingo-To-Do-List"
 include(":app")
  

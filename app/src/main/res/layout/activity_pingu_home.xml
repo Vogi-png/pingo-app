@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/headerLogo3"
-            app:srcCompat="@drawable/imagem_pingo" />
+            app:srcCompat="@drawable/pingo_default" />
 
         <!-- Nome do Pinguim -->
         <ImageView
