@@ -10,10 +10,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.taskapp.ui.TrocarTema;
+
 public class PaginaUsuario extends AppCompatActivity {
 
     Button button7;
     Button button10;
+
+    Button button9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,12 @@ public class PaginaUsuario extends AppCompatActivity {
         button10 = findViewById(R.id.button10);
         button10.setOnClickListener(v -> {
             Intent intent = new Intent(PaginaUsuario.this, TodosCartoes.class);
+            startActivity(intent);
+        });
+
+        button9 = findViewById(R.id.button9);
+        button9.setOnClickListener(v -> {
+            Intent intent = new Intent(PaginaUsuario.this, TrocarTema.class);
             startActivity(intent);
         });
     }

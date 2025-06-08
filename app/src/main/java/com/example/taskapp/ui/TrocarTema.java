@@ -5,6 +5,7 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.taskapp.R;
 
@@ -18,12 +19,12 @@ public class TrocarTema extends AppCompatActivity {
 
         Button btnTemaClaro = findViewById(R.id.btnTemaClaro);
         btnTemaClaro.setOnClickListener(v -> {
-            //TEMA CLARO
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         });
 
         Button btnTemaEscuro = findViewById(R.id.btnTemaEscuro);
         btnTemaEscuro.setOnClickListener(v -> {
-            //TEMA ESCURO
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         });
     }
 }
