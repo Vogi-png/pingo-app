@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1017742563994",
+    "firebase_url": "https://pingo-to-do-list-default-rtdb.firebaseio.com",
+    "project_id": "pingo-to-do-list",
+    "storage_bucket": "pingo-to-do-list.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017742563994:android:c9c4be881902df914d9d23",
+        "android_client_info": {
+          "package_name": "com.example.taskapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017742563994-s67dp43610p2v4gc1opqelhs8oi8t7qo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPlsEOt4ZB7yVUK4Q0eeXjbDO33yAGvzI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017742563994-3inq841po55ueeh03o05qpm786u83h5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
