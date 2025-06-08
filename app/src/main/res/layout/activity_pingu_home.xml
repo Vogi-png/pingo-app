@@ -1,81 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Mantenha só um ConstraintLayout -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pinguHomeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PinguHome">
+    android:background="@android:color/white">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <!-- Logo/Header -->
+    <ImageView
+        android:id="@+id/headerLogo4"
+        android:layout_width="521dp"
+        android:layout_height="186dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/header_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Pinguim -->
 
-        <ImageView
-            android:id="@+id/pinguImageHome"
-            android:layout_width="274dp"
-            android:layout_height="270dp"
-            android:layout_marginTop="34dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerLogo3"
-            app:srcCompat="@drawable/imagem_pingo" />
+    <ImageView
+        android:id="@+id/pinguImageHome"
+        android:layout_width="274dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="220dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/imagem_pingo" />
 
-        <!-- Nome do Pinguim -->
-        <ImageView
-            android:id="@+id/headerLogo3"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/header_default"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/pinguNameHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Pingo da Silva"
+        android:textColor="@color/cinza"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/pinguImageHome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/pinguNameHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Pingo da Silva"
-            android:textColor="@color/cinza"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pinguImageHome" />
+    <!-- Botão -->
+    <Button
+        android:id="@+id/btnPersonalizar"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#5F8DF6"
+        android:text="Personalizar"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/pinguNameHome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Botão Personalizar -->
-        <Button
-            android:id="@+id/btnPersonalizar"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#5F8DF6"
-            android:paddingLeft="35dp"
-            android:text="Personalizar"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pinguNameHome" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="23dp"
-            android:layout_marginStart="-125dp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnPersonalizar"
-            app:srcCompat="@drawable/camiseta_icon" />
-
-        <!-- Barra inferior -->
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Icone -->
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="-125dp"
+        app:layout_constraintTop_toTopOf="@id/btnPersonalizar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:srcCompat="@drawable/camiseta_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>
