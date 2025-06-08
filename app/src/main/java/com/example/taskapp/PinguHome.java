@@ -4,22 +4,31 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.taskapp.databinding.ActivityListaTarefasBinding;
+import com.example.taskapp.databinding.ActivityPinguHomeBinding;
 
 public class PinguHome extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
 
-    private ActivityListaTarefasBinding binding;
+
+    private ActivityPinguHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        // Barra de navegação
-        binding.bottomNavigationView.setSelectedItemId(R.id.navigation_dashboard);
+
+        binding = ActivityPinguHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
+        // --- Início da Lógica da Barra de Navegação ---
+        binding.bottomNavigationView.setSelectedItemId(R.id.navigation_pingo); // Marca o ícone correto
+
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
@@ -33,24 +42,19 @@ public class PinguHome extends AppCompatActivity {
                 startActivity(new Intent(this, PaginaSobre.class));
                 return true;
             } else if (itemId == R.id.navigation_pingo) {
-                startActivity(new Intent(this, PinguHome.class));
+
                 return true;
-            } else if (itemId == R.id.navigation_centro) {
-                return false;
             }
             return false;
         });
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pingu_home);
+        binding.botaomais.setOnClickListener(v -> {
+            startActivity(new Intent(this, CriarTarefa.class));
+        });
 
-        ImageView pinguImage = findViewById(R.id.pinguImageHome);
-
-        // Cria o MediaPlayer com o som do raw
         mediaPlayer = MediaPlayer.create(this, R.raw.sompingu);
 
-        // Define o clique na imagem
-        pinguImage.setOnClickListener(new View.OnClickListener() {
+        binding.pinguImageHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mediaPlayer != null) {
