@@ -9,16 +9,6 @@
     android:background="@android:color/white">
 
 
-        <ImageView
-            android:id="@+id/pinguImageHome"
-            android:layout_width="274dp"
-            android:layout_height="270dp"
-            android:layout_marginTop="34dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headerLogo3"
-            app:srcCompat="@drawable/pingo_default" />
-
         <!-- Nome do Pinguim -->
         <ImageView
             android:id="@+id/headerLogo3"
@@ -40,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/imagem_pingo" />
+        app:srcCompat="@drawable/pingo_default" />
 
     <TextView
         android:id="@+id/pinguNameHome"
@@ -80,4 +70,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:srcCompat="@drawable/camiseta_icon" />
+
+    <!-- Barra de tarefas -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/azul_pingo"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/botaomais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-35dp"
+        android:src="@drawable/nav_mais"
+        android:backgroundTint="@color/botao_mais"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

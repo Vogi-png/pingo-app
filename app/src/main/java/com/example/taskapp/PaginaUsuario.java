@@ -15,8 +15,6 @@ public class PaginaUsuario extends AppCompatActivity {
     Button button7;
     Button button10;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -53,7 +53,7 @@ public class ListaTarefas extends AppCompatActivity {
                 startActivity(new Intent(this, PaginaSobre.class));
                 return true;
             } else if (itemId == R.id.navigation_pingo) {
-                startActivity(new Intent(this, LoginForm.class));
+                startActivity(new Intent(this, PinguHome.class));
                 return true;
             } else if (itemId == R.id.navigation_centro) {
                 return false;
