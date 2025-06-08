@@ -15,8 +15,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginForm extends AppCompatActivity {
 
@@ -24,6 +30,7 @@ public class LoginForm extends AppCompatActivity {
     private Button btnLogin;
     private FirebaseAuth auth;
     private ProgressDialog progressDialog;
+    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +38,13 @@ public class LoginForm extends AppCompatActivity {
         setContentView(R.layout.activity_login_form);
 
         auth = FirebaseAuth.getInstance();
+        usersRef = FirebaseDatabase.getInstance().getReference("usuarios");
 
         inputEmail = findViewById(R.id.id_login_insertEmail);
         inputSenha = findViewById(R.id.id_login_insertSenha);
         btnLogin = findViewById(R.id.id_confirmLogin);
         progressDialog = new ProgressDialog(this);
 
-        // Login com Firebase
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,9 +65,35 @@ public class LoginForm extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressDialog.dismiss();
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(LoginForm.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginForm.this, NomearPingo.class));
-                                    finish();
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    if (user != null) {
+                                        String uid = user.getUid();
+
+                                        usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (snapshot.exists()) {
+                                                    String nome = snapshot.child("nome").getValue(String.class);
+                                                    String email = snapshot.child("email").getValue(String.class);
+
+                                                    Toast.makeText(LoginForm.this, "Bem-vindo, " + nome, Toast.LENGTH_SHORT).show();
+
+                                                    Intent intent = new Intent(LoginForm.this, ListaTarefas.class);
+                                                    intent.putExtra("nomeUsuario", nome);
+                                                    intent.putExtra("emailUsuario", email);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(LoginForm.this, "Usuário não encontrado no banco de dados.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                Toast.makeText(LoginForm.this, "Erro ao acessar banco: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
                                 } else {
                                     Toast.makeText(LoginForm.this, "Erro ao fazer login: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
@@ -69,7 +102,6 @@ public class LoginForm extends AppCompatActivity {
             }
         });
 
-        // Ir para Cadastro
         TextView tvNaoPossuiCadastro = findViewById(R.id.id_redirectCadastro);
         tvNaoPossuiCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
