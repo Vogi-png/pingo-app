@@ -37,4 +37,3 @@ public class Tarefa {
     public Long getDtcriacao() { return dtcriacao; }
     public void setDtcriacao(Long dtcriacao) { this.dtcriacao = dtcriacao; }
 }
-

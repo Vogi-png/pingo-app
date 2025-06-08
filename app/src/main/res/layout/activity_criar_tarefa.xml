@@ -126,11 +126,10 @@
       android:layout_height="190dp"
       android:layout_marginTop="24dp"
       android:adjustViewBounds="true"
-      android:scaleType="fitStart"
       android:src="@drawable/header_pingo"
-      app:layout_constraintTop_toBottomOf="@id/btnSalvar"
       app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-      app:layout_constraintStart_toStartOf="parent" />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/btnSalvar" />
 
   <FrameLayout
       android:id="@+id/flFragment"
@@ -141,31 +140,33 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent" />
 
+
   <!-- Barra de tarefas -->
+
   <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/bottomNavigationView"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:background="@color/azul_pingo"
-      app:menu="@menu/bottom_nav_menu"
-      app:labelVisibilityMode="labeled"
       app:itemHorizontalTranslationEnabled="false"
       app:itemIconTint="@android:color/white"
       app:itemTextColor="@android:color/white"
+      app:labelVisibilityMode="labeled"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
+      app:menu="@menu/bottom_nav_menu" />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
       android:id="@+id/botaomais"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="-35dp"
-      android:src="@drawable/nav_mais"
       android:backgroundTint="@color/botao_mais"
-      app:tint="@color/white"
+      android:src="@drawable/nav_mais"
       app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
+      app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

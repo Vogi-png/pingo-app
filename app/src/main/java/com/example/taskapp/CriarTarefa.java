@@ -1,5 +1,6 @@
 package com.example.taskapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +76,7 @@ public class CriarTarefa extends AppCompatActivity {
         database.child(tarefaId).setValue(tarefa).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Tarefa salva com sucesso!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ListaTarefas.class));
                 finish(); // volta pra ListaTarefas
             } else {
                 Toast.makeText(this, "Erro ao salvar tarefa", Toast.LENGTH_SHORT).show();
