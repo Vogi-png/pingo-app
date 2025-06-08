@@ -119,7 +119,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent" />
 
-  <!-- Imagem inferior esquerda -->
+  <!-- Imagem pingoa -->
   <ImageView
       android:id="@+id/header_pingo"
       android:layout_width="230dp"
@@ -129,9 +129,9 @@
       android:scaleType="fitStart"
       android:src="@drawable/header_pingo"
       app:layout_constraintTop_toBottomOf="@id/btnSalvar"
+      app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
       app:layout_constraintStart_toStartOf="parent" />
 
-  <!-- FrameLayout para fragmentos (opcional) -->
   <FrameLayout
       android:id="@+id/flFragment"
       android:layout_width="0dp"
