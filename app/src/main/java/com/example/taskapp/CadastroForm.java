@@ -1,91 +1,81 @@
 package com.example.taskapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class CadastroForm extends AppCompatActivity {
 
-    private FirebaseAuth auth; // Firebase Auth
+    private EditText inputEmail, inputSenha, inputConfirmarSenha;
+    private Button btnCadastrar;
+    private FirebaseAuth auth;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cadastro_form);
 
         auth = FirebaseAuth.getInstance();
 
-        // Referência dos campos
-        EditText nomeField = findViewById(R.id.id_cadastro_insertNome);
-        EditText emailField = findViewById(R.id.id_cadastro_insertEmail);
-        EditText senhaField = findViewById(R.id.id_cadastro_insertSenha);
-        EditText confirmarSenhaField = findViewById(R.id.id_cadastro_insertConfirmarSenha);
+        inputEmail = findViewById(R.id.id_cadastro_insertEmail);
+        inputSenha = findViewById(R.id.id_cadastro_insertSenha);
+        inputConfirmarSenha = findViewById(R.id.id_cadastro_insertConfirmarSenha);
+        btnCadastrar = findViewById(R.id.button_cadastrar);
+        progressDialog = new ProgressDialog(this);
 
-        // Botão voltar
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = inputEmail.getText().toString().trim();
+                String senha = inputSenha.getText().toString().trim();
+                String confirmarSenha = inputConfirmarSenha.getText().toString().trim();
+
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(senha) || TextUtils.isEmpty(confirmarSenha)) {
+                    Toast.makeText(CadastroForm.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!senha.equals(confirmarSenha)) {
+                    Toast.makeText(CadastroForm.this, "As senhas não coincidem", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                progressDialog.setMessage("Cadastrando...");
+                progressDialog.show();
+
+                auth.createUserWithEmailAndPassword(email, senha)
+                        .addOnCompleteListener(CadastroForm.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                progressDialog.dismiss();
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(CadastroForm.this, "Usuário cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(CadastroForm.this, NomearPingo.class));
+                                    finish();
+                                } else {
+                                    Toast.makeText(CadastroForm.this, "Erro ao cadastrar: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+            }
+        });
+
         ImageView voltarBtn = findViewById(R.id.voltarBtn);
-        voltarBtn.setOnClickListener(v -> {
-            startActivity(new Intent(CadastroForm.this, LoginForm.class));
-            finish();
-        });
-
-        // Botão cadastrar
-        Button btnCadastrar = findViewById(R.id.button_cadastrar);
-        btnCadastrar.setOnClickListener(v -> {
-            String nome = nomeField.getText().toString().trim();
-            String email = emailField.getText().toString().trim();
-            String senha = senhaField.getText().toString();
-            String confirmarSenha = confirmarSenhaField.getText().toString();
-
-            // Validações básicas
-            if (nome.isEmpty()) {
-                Toast.makeText(this, "Por favor, insira seu nome.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (email.isEmpty() || !email.contains("@")) {
-                Toast.makeText(this, "Insira um email válido.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (senha.isEmpty() || senha.length() < 6) {
-                Toast.makeText(this, "A senha deve ter no mínimo 6 caracteres.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (!senha.equals(confirmarSenha)) {
-                Toast.makeText(this, "As senhas não coincidem.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            auth.createUserWithEmailAndPassword(email, senha)
-                    .addOnCompleteListener(CadastroForm.this, task -> {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = auth.getCurrentUser();
-                            Toast.makeText(CadastroForm.this, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
-
-                            // Vai para próxima tela
-                            Intent intent = new Intent(CadastroForm.this, NomearPingo.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(CadastroForm.this, "Erro ao cadastrar: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            Log.w("Cadastro", "createUserWithEmail:failure", task.getException());
-                        }
-                    });
-        });
+        voltarBtn.setOnClickListener(v -> startActivity(new Intent(CadastroForm.this, LoginForm.class)));
     }
 }
