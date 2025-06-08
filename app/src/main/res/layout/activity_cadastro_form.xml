@@ -216,12 +216,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmarSenhaCardView" />
 
-    <ImageView
-        android:id="@+id/voltarBtn"
-        android:layout_width="81dp"
-        android:layout_height="76dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/header_seta" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
