@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_focused="true" android:drawable="@drawable/insert_border_focused" />
-    <item android:drawable="@drawable/insert_border_default" />
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="#EDEDED" />
+    <stroke android:width="2dp" android:color="#96ADFF" />
+    <corners android:radius="25dp" /> <!-- Igual ou maior que o CardView -->
+</shape>
