@@ -70,48 +70,45 @@ public class PinguSkin extends AppCompatActivity {
                 findViewById(R.id.skinSlot_9),
         };
 
+        String uid = usuarioLogado.getUid();
+        Log.d("myTag", "Current User ID: " + uid);
+        DatabaseReference userRefPingo = database.child("usuarios").child(uid).child("nomePingo");
+        DatabaseReference userRefPlano = database.child("usuarios").child(uid).child("plano");
 
-        if(usuarioLogado != null){
-            String uid = usuarioLogado.getUid();
-            Log.d("myTag", "Current User ID: " + uid);
-            DatabaseReference userRefPingo = database.child("usuarios").child(uid).child("nomePingo");
-            DatabaseReference userRefPlano = database.child("usuarios").child(uid).child("plano");
+        userRefPingo.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nomePingo = snapshot.getValue(String.class);
+                Log.d("myTag", "fk_nome_pingo = " + nomePingo);
+                txtPingo.setText(nomePingo);
 
-            userRefPingo.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    nomePingo = snapshot.getValue(String.class);
-                    Log.d("myTag", "fk_nome_pingo = " + nomePingo);
-                    txtPingo.setText(nomePingo);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Erro ao ler o nome do Pingo", Toast.LENGTH_SHORT).show();
+                Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+            }
+        });
+
+        userRefPlano.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue(String.class).equals("free")){
+                    plano = false;
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getApplicationContext(), "Erro ao ler o nome do Pingo", Toast.LENGTH_SHORT).show();
-                    Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+                else{
+                    plano = true;
                 }
-            });
+                Log.d("myTag", "User has " + plano + " plan.");
+            }
 
-            userRefPlano.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.getValue(String.class).equals("free")){
-                        plano = false;
-                    }
-                    else{
-                        plano = true;
-                    }
-                    Log.d("myTag", "User has plan: " + plano);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getApplicationContext(), "Erro ao ler Plano", Toast.LENGTH_SHORT).show();
-                    Log.e("myTag", "Failed to read plano", error.toException());
-                }
-            });
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Erro ao ler Plano", Toast.LENGTH_SHORT).show();
+                Log.e("myTag", "Failed to read plano", error.toException());
+            }
+        });
 
         btnSalvarPingo.setOnClickListener(new View.OnClickListener() {
 
@@ -146,17 +143,23 @@ public class PinguSkin extends AppCompatActivity {
             final int index = i;
 
             currentImage.setOnClickListener(view -> {
-                for (ImageView image : imageViews) {
-                    image.setBackgroundResource(R.drawable.scroll_background_unselected);
-                }
-
-                currentImage.setBackgroundResource(R.drawable.scroll_background_selected);
-
-                selectedIndex[0] = index;
-
                 int selectedImage_id = id_Skins[index];
-                aplicarSkin(selectedImage_id);
+                Log.d("MyTag", "Index da skin: " + selectedImage_id);
 
+                if(index <= 1 || plano) {
+                    for (ImageView image : imageViews) {
+                        image.setBackgroundResource(R.drawable.scroll_background_unselected);
+                    }
+
+                    currentImage.setBackgroundResource(R.drawable.scroll_background_selected);
+
+                    selectedIndex[0] = index;
+
+                    aplicarSkin(selectedImage_id);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Faça upgrade para o plano Premium para desbloquear esta skin.", Toast.LENGTH_LONG).show();
+                }
             });
         }
 
