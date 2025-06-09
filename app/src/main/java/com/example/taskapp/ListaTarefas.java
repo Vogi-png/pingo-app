@@ -166,7 +166,7 @@ public class ListaTarefas extends AppCompatActivity {
                 listaTarefas.clear();
                 for (DataSnapshot s : snap.getChildren()) {
                     Tarefa t = s.getValue(Tarefa.class);
-                    if (t != null && t.getConcluida() == 0) {
+                    if (t != null && "pendente".equals(t.getStatus())) {
                         listaTarefas.add(t);
                     }
                 }
