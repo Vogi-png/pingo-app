@@ -13,7 +13,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.taskapp.databinding.ActivityCriarTarefaBinding;
-import com.example.taskapp.databinding.ActivityListaTarefasBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +28,7 @@ public class CriarTarefa extends AppCompatActivity {
     private Button btnSalvar;
     private ActivityCriarTarefaBinding binding;
 
+    private String tarefaIdRecebida; // Usado para verificar se está editando
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,6 @@ public class CriarTarefa extends AppCompatActivity {
         EdgeToEdge.enable(this);
         binding = ActivityCriarTarefaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -48,13 +47,30 @@ public class CriarTarefa extends AppCompatActivity {
         editDescricao = findViewById(R.id.editDescricao);
         btnSalvar = findViewById(R.id.btnSalvar);
 
-        btnSalvar.setOnClickListener(v -> salvarTarefaNoFirebase());
+        // Verifica se é edição
+        Intent intent = getIntent();
+        tarefaIdRecebida = intent.getStringExtra("tarefaId");
 
-        //barra de navegacao
+        if (tarefaIdRecebida != null) {
+            String titulo = intent.getStringExtra("titulo");
+            String descricao = intent.getStringExtra("descricao");
+
+            editTitulo.setText(titulo);
+            editDescricao.setText(descricao);
+            btnSalvar.setText("Atualizar");
+        }
+
+        btnSalvar.setOnClickListener(v -> {
+            if (tarefaIdRecebida != null) {
+                atualizarTarefaNoFirebase();
+            } else {
+                salvarTarefaNoFirebase();
+            }
+        });
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavHelper.setup(this, bottomNavigationView);
     }
-
 
     private void salvarTarefaNoFirebase() {
         String titulo = editTitulo.getText().toString().trim();
@@ -66,10 +82,7 @@ public class CriarTarefa extends AppCompatActivity {
             return;
         }
 
-        // ID de usuário - autenticacao com login
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //String userId = "123";
-
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("tarefas");
         String tarefaId = database.push().getKey();
 
@@ -90,9 +103,35 @@ public class CriarTarefa extends AppCompatActivity {
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Tarefa salva com sucesso!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, ListaTarefas.class));
-                finish(); // volta pra ListaTarefas
+                finish();
             } else {
                 Toast.makeText(this, "Erro ao salvar tarefa", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void atualizarTarefaNoFirebase() {
+        String titulo = editTitulo.getText().toString().trim();
+        String descricao = editDescricao.getText().toString().trim();
+
+        if (titulo.isEmpty()) {
+            editTitulo.setError("Digite o título");
+            editTitulo.requestFocus();
+            return;
+        }
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("tarefas").child(tarefaIdRecebida);
+        Map<String, Object> atualizacoes = new HashMap<>();
+        atualizacoes.put("titulo", titulo);
+        atualizacoes.put("descricao", descricao);
+
+        ref.updateChildren(atualizacoes).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(this, "Tarefa atualizada com sucesso!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, ListaTarefas.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Erro ao atualizar tarefa", Toast.LENGTH_SHORT).show();
             }
         });
     }
