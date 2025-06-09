@@ -1,6 +1,5 @@
 package com.example.taskapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -61,14 +59,18 @@ public class CadastroForm extends AppCompatActivity {
                                 String userId = auth.getCurrentUser().getUid();
 
                                 // Criar objeto com os dados do usuário
-                                Usuario usuario = new Usuario(nome, email);
+                                Usuario usuario = new Usuario(nome, email, senha);
 
                                 // Salvar no Realtime Database em /usuarios/userId
                                 databaseReference.child(userId).setValue(usuario)
                                         .addOnCompleteListener(task2 -> {
                                             if (task2.isSuccessful()) {
                                                 Toast.makeText(CadastroForm.this, "Cadastro concluído!", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(CadastroForm.this, LoginForm.class));
+
+                                                // Passa userId para NomearPingo
+                                                Intent intent = new Intent(CadastroForm.this, NomearPingo.class);
+                                                intent.putExtra("userId", userId);
+                                                startActivity(intent);
                                                 finish();
                                             } else {
                                                 Toast.makeText(CadastroForm.this, "Erro ao salvar no banco: " + task2.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -82,16 +84,19 @@ public class CadastroForm extends AppCompatActivity {
         });
     }
 
-    // Classe auxiliar para armazenar os dados do usuário
     public static class Usuario {
         public String nome;
         public String email;
+        public String senha;
+        public String plano; // novo campo
 
         public Usuario() {} // Necessário para Firebase
 
-        public Usuario(String nome, String email) {
+        public Usuario(String nome, String email, String senha) {
             this.nome = nome;
             this.email = email;
+            this.senha = senha;
+            this.plano = "free"; // valor padrão
         }
     }
 }
