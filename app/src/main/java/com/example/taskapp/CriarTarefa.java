@@ -12,6 +12,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.taskapp.databinding.ActivityCriarTarefaBinding;
+import com.example.taskapp.databinding.ActivityListaTarefasBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
@@ -23,12 +27,16 @@ public class CriarTarefa extends AppCompatActivity {
 
     private EditText editTitulo, editDescricao;
     private Button btnSalvar;
+    private ActivityCriarTarefaBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_criar_tarefa);
+        binding = ActivityCriarTarefaBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -41,7 +49,12 @@ public class CriarTarefa extends AppCompatActivity {
         btnSalvar = findViewById(R.id.btnSalvar);
 
         btnSalvar.setOnClickListener(v -> salvarTarefaNoFirebase());
+
+        //barra de navegacao
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavHelper.setup(this, bottomNavigationView);
     }
+
 
     private void salvarTarefaNoFirebase() {
         String titulo = editTitulo.getText().toString().trim();
@@ -54,8 +67,8 @@ public class CriarTarefa extends AppCompatActivity {
         }
 
         // ID de usuário - autenticacao com login
-        //String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String userId = "123";
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //String userId = "123";
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("tarefas");
         String tarefaId = database.push().getKey();

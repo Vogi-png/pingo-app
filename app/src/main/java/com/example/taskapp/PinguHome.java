@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.taskapp.databinding.ActivityPinguHomeBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,27 +37,9 @@ public class PinguHome extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-        // --- Início da Lógica da Barra de Navegação ---
-        binding.bottomNavigationView.setSelectedItemId(R.id.navigation_pingo); // Marca o ícone correto
-
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-
-            if (itemId == R.id.navigation_home) {
-                startActivity(new Intent(this, PaginaUsuario.class));
-                return true;
-            } else if (itemId == R.id.navigation_dashboard) {
-                startActivity(new Intent(this, ListaTarefas.class));
-                return true;
-            } else if (itemId == R.id.navigation_info) {
-                startActivity(new Intent(this, PaginaSobre.class));
-                return true;
-            } else if (itemId == R.id.navigation_pingo) {
-
-                return true;
-            }
-            return false;
-        });
+        //barra de navegacao
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavHelper.setup(this, bottomNavigationView);
 
         binding.botaomais.setOnClickListener(v -> {
             startActivity(new Intent(this, CriarTarefa.class));

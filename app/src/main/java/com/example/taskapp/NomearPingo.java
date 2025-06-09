@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -25,8 +26,12 @@ public class NomearPingo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nomear_pingo);
 
-        editTextNomePingo = findViewById(R.id.editTextText); // ID do seu EditText para nomear o pingo
+        editTextNomePingo = findViewById(R.id.id_editPingoNome);
         nomear_seguirBtn = findViewById(R.id.nomear_seguirBtn);
+
+        //barra de navegacao
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavHelper.setup(this, bottomNavigationView);
 
         // Receber o ID do usuário passado na Intent
         userId = getIntent().getStringExtra("userId");

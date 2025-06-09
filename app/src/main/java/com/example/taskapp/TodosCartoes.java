@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.taskapp.databinding.ActivityTodosCartoesBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -57,6 +58,10 @@ public class TodosCartoes extends AppCompatActivity implements CartaoAdapter.OnI
         binding.btnAdicionarCartao.setOnClickListener(v -> {
             startActivity(new Intent(this, CadastrarCartao.class));
         });
+
+        //barra de navegacao
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavHelper.setup(this, bottomNavigationView);
     }
 
     @Override
