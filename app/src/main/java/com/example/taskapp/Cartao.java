@@ -1,30 +1,30 @@
-// Arquivo: Cartao.java
+// Local: app/src/main/java/com/example/taskapp/Cartao.java
 package com.example.taskapp;
 
+import com.google.firebase.firestore.DocumentId; // <-- PASSO 1.1: IMPORTAR
+
 public class Cartao {
+
+    @DocumentId // <-- PASSO 1.2: Adicionar esta anotação
+    private String documentId; // <-- PASSO 1.3: Adicionar o campo para o ID
+
+    // Seus campos existentes
     private String cardholderName;
     private String lastFourDigits;
     private String expirationDate;
-    private String cardBrand; // <-- CAMPO ADICIONADO
+    private String cardBrand;
 
-    // Construtor vazio é OBRIGATÓRIO para o Firestore
+    // Construtor vazio (obrigatório para o Firestore)
     public Cartao() {}
 
-    // Getters
-    public String getCardholderName() {
-        return cardholderName;
+    // --- PASSO 1.4: Adicionar o Getter para o ID ---
+    public String getDocumentId() {
+        return documentId;
     }
 
-    public String getLastFourDigits() {
-        return lastFourDigits;
-    }
-
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    // Getter para o novo campo
-    public String getCardBrand() { // <-- GETTER ADICIONADO
-        return cardBrand;
-    }
+    // --- Seus outros Getters ---
+    public String getCardholderName() { return cardholderName; }
+    public String getLastFourDigits() { return lastFourDigits; }
+    public String getExpirationDate() { return expirationDate; }
+    public String getCardBrand() { return cardBrand; }
 }
