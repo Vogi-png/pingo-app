@@ -2,7 +2,7 @@
 <resources>
 
     <color name="branco">#F0F4FE</color>
-    <color name="cinza">#B5B5B5</color>
+    <color name="cinzaAPP">#B5B5B5</color>
     <color name="azulClaro">#A7C1EB</color>
     <color name="azulMedio1">#759CDB</color>
     <color name="azulMedio2">#96ADFF</color>
