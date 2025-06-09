@@ -135,7 +135,7 @@ public class TodosCartoes extends AppCompatActivity implements CartaoAdapter.OnI
                     String uid = usuarioAtual.getUid();
                     database = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference userRef = database.child("usuarios").child(uid).child("plano");
-                    userRef.setValue("paid")
+                    userRef.setValue("pro")
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(TodosCartoes.this, "Prêmio adquirido com o cartão " + cartao.getLastFourDigits(), Toast.LENGTH_LONG).show();
                             })
