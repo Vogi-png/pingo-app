@@ -29,6 +29,7 @@ public class PinguSkin extends AppCompatActivity {
     private FirebaseUser usuarioLogado;
     private DatabaseReference database;
     private String nomePingo;
+    private boolean plano;
     private EditText txtPingo;
     private Button btnSalvarPingo;
     private ImageView skinAtual;
@@ -73,9 +74,10 @@ public class PinguSkin extends AppCompatActivity {
         if(usuarioLogado != null){
             String uid = usuarioLogado.getUid();
             Log.d("myTag", "Current User ID: " + uid);
-            DatabaseReference userRef = database.child("usuarios").child(uid).child("nomePingo");
+            DatabaseReference userRefPingo = database.child("usuarios").child(uid).child("nomePingo");
+            DatabaseReference userRefPlano = database.child("usuarios").child(uid).child("plano");
 
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            userRefPingo.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     nomePingo = snapshot.getValue(String.class);
@@ -86,7 +88,27 @@ public class PinguSkin extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getApplicationContext(), "Erro ao ler o nome do Pingo", Toast.LENGTH_SHORT).show();
                     Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+                }
+            });
+
+            userRefPlano.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.getValue(String.class).equals("free")){
+                        plano = false;
+                    }
+                    else{
+                        plano = true;
+                    }
+                    Log.d("myTag", "User has plan: " + plano);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getApplicationContext(), "Erro ao ler Plano", Toast.LENGTH_SHORT).show();
+                    Log.e("myTag", "Failed to read plano", error.toException());
                 }
             });
         }
