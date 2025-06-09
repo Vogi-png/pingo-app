@@ -1,14 +1,20 @@
 package com.example.taskapp;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Toast;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskapp.databinding.ActivityListaTarefasBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -71,12 +77,14 @@ public class ListaTarefas extends AppCompatActivity {
         ItemTouchHelper.SimpleCallback simpleCallback =
                 new ItemTouchHelper.SimpleCallback(0,
                         ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
                     @Override
                     public boolean onMove(@NonNull androidx.recyclerview.widget.RecyclerView rv,
                                           @NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder vh,
                                           @NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder target) {
                         return false;
                     }
+
                     @Override
                     public void onSwiped(@NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder vh,
                                          int direction) {
@@ -84,14 +92,12 @@ public class ListaTarefas extends AppCompatActivity {
                         Tarefa t = listaTarefas.get(pos);
 
                         if (direction == ItemTouchHelper.LEFT) {
-                            // Excluir
                             FirebaseDatabase.getInstance()
                                     .getReference("tarefas")
                                     .child(t.getId())
                                     .removeValue();
                             Toast.makeText(ListaTarefas.this, "Tarefa excluída", Toast.LENGTH_SHORT).show();
                         } else {
-                            // Editar
                             Intent intent = new Intent(ListaTarefas.this, CriarTarefa.class);
                             intent.putExtra("tarefaId", t.getId());
                             intent.putExtra("titulo", t.getTitulo());
@@ -100,13 +106,57 @@ public class ListaTarefas extends AppCompatActivity {
                             startActivity(intent);
                         }
 
-                        // Refresh item (para não sumir)
                         adapter.notifyItemChanged(pos);
                     }
+
+                    @Override
+                    public void onChildDraw(@NonNull Canvas c,
+                                            @NonNull RecyclerView recyclerView,
+                                            @NonNull RecyclerView.ViewHolder viewHolder,
+                                            float dX, float dY,
+                                            int actionState, boolean isCurrentlyActive) {
+
+                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+                        View itemView = viewHolder.itemView;
+                        Paint paint = new Paint();
+
+                        int iconMargin = 50;
+                        int iconTop = itemView.getTop() + (itemView.getHeight() - 100) / 2;
+                        int iconBottom = iconTop + 100;
+
+                        if (dX > 0) { // Direita (editar)
+                            paint.setColor(Color.parseColor("#2196F3")); // azul
+                            c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(),
+                                    (float) itemView.getLeft() + dX, (float) itemView.getBottom(), paint);
+
+                            Drawable icon = ContextCompat.getDrawable(ListaTarefas.this, R.drawable.ic_editar);
+                            if (icon != null) {
+                                int iconLeft = itemView.getLeft() + iconMargin;
+                                int iconRight = iconLeft + 100;
+                                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                                icon.draw(c);
+                            }
+
+                        } else if (dX < 0) { // Esquerda (excluir)
+                            paint.setColor(Color.parseColor("#F44336")); // vermelho
+                            c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
+                                    (float) itemView.getRight(), (float) itemView.getBottom(), paint);
+
+                            Drawable icon = ContextCompat.getDrawable(ListaTarefas.this, R.drawable.ic_lixeira);
+                            if (icon != null) {
+                                int iconRight = itemView.getRight() - iconMargin;
+                                int iconLeft = iconRight - 100;
+                                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                                icon.draw(c);
+                            }
+                        }
+                    }
                 };
-        new ItemTouchHelper(simpleCallback)
-                .attachToRecyclerView(binding.recyclerView);
+
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(binding.recyclerView);
     }
+
 
     private void buscarTarefas() {
         Query q = FirebaseDatabase.getInstance()
