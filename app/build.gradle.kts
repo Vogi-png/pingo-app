@@ -45,6 +45,7 @@ android {
 
 dependencies {
 
+    implementation(libs.firebase.firestore)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

@@ -46,13 +46,14 @@
             android:paddingBottom="48dp">
 
             <TextView
+                android:id="@+id/textNome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Nome (como está no cartão)"
-                android:textSize="17sp"
+                android:paddingStart="5dp"
                 android:paddingBottom="5dp"
-                android:paddingStart="5dp" />
+                android:text="Nome (como está no cartão)"
+                android:textSize="17sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -66,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/insert_border_select"
+                    android:hint="seunome"
                     android:padding="16dp"
                     android:textColor="#000000"
                     android:textSize="15dp" />
@@ -73,13 +75,14 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/textNumero"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Número do Cartão"
-                android:textSize="17sp"
+                android:paddingStart="5dp"
                 android:paddingBottom="5dp"
-                android:paddingStart="5dp" />
+                android:text="Número do Cartão"
+                android:textSize="17sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -94,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/insert_border_select"
                     android:inputType="number"
-                    android:padding="16dp"
+                    android:maxLength="23"  android:padding="16dp"
                     android:textColor="#000000"
                     android:textSize="15dp" />
             </androidx.cardview.widget.CardView>
@@ -106,18 +109,19 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="100dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textCVC"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:paddingStart="5dp"
-                        android:text="CVC"
                         android:paddingBottom="4dp"
+                        android:text="CVC"
                         android:textSize="16sp" />
 
                     <androidx.cardview.widget.CardView
@@ -132,7 +136,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/insert_border_select"
+                            android:hint="323"
                             android:inputType="number"
+                            android:maxLength="4"
                             android:padding="13dp"
                             android:textColor="#000000"
                             android:textSize="15dp" />
@@ -144,17 +150,18 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/textValidade"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:paddingBottom="4dp"
                         android:paddingStart="5dp"
+                        android:paddingBottom="4dp"
                         android:text="Validade (MM/AA)"
                         android:textSize="16sp" />
 
@@ -170,7 +177,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/insert_border_select"
-                            android:inputType="date"
+                            android:inputType="number"
+                            android:hint="MM/AA"
+                            android:maxLength="5"
                             android:padding="13dp"
                             android:textColor="#000000"
                             android:textSize="15dp" />
