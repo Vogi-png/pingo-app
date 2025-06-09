@@ -47,7 +47,7 @@
 
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/id_editPingoNome"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/insert_border_select"

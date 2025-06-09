@@ -20,43 +20,47 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <!-- Botão -->
+
     <ImageView
         android:id="@+id/pinguImageHome"
         android:layout_width="412dp"
         android:layout_height="358dp"
         android:layout_marginTop="120dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/id_pinguNameHome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/pingo_default" />
 
     <TextView
-        android:id="@+id/pinguNameHome"
+        android:id="@+id/id_pinguNameHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="Pingo da Silva"
         android:textColor="@color/cinza"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pinguImageHome" />
+        app:layout_constraintTop_toBottomOf="@+id/pinguImageHome" />
 
-    <!-- Botão -->
     <Button
         android:id="@+id/btnPersonalizar"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
         android:backgroundTint="#5F8DF6"
         android:text="Personalizar"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pinguNameHome" />
+        app:layout_constraintTop_toBottomOf="@+id/id_pinguNameHome"
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <!-- Icone -->
     <ImageView
