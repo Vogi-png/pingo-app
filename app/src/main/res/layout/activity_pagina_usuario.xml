@@ -117,6 +117,7 @@
             app:icon="@drawable/img_cartao"
             app:iconPadding="-130dp"
             app:iconSize="28dp" />
+
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
