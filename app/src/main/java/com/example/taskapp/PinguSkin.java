@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,6 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PinguSkin extends AppCompatActivity {
 
     private FirebaseUser usuarioLogado;
@@ -27,6 +31,19 @@ public class PinguSkin extends AppCompatActivity {
     private String nomePingo;
     private EditText txtPingo;
     private Button btnSalvarPingo;
+    private ImageView skinAtual;
+
+    private int[] id_Skins = {
+            R.drawable.pingo_default,
+            R.drawable.pingo_jabba,
+            R.drawable.pingo_carioca,
+            R.drawable.pingo_ciborgue,
+            R.drawable.pingo_emo,
+            R.drawable.pingo_namorados,
+            R.drawable.pingo_kovalski,
+            R.drawable.pingo_clube_penguin,
+            R.drawable.pingo_pablo,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +55,20 @@ public class PinguSkin extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         txtPingo = findViewById(R.id.id_editPingoNome);
         btnSalvarPingo = findViewById(R.id.id_btnSalvarPingo);
+        skinAtual = findViewById(R.id.pinguPreview);
+
+        ImageView[] imageViews = {
+                findViewById(R.id.skinSlot_1),
+                findViewById(R.id.skinSlot_2),
+                findViewById(R.id.skinSlot_3),
+                findViewById(R.id.skinSlot_4),
+                findViewById(R.id.skinSlot_5),
+                findViewById(R.id.skinSlot_6),
+                findViewById(R.id.skinSlot_7),
+                findViewById(R.id.skinSlot_8),
+                findViewById(R.id.skinSlot_9),
+        };
+
 
         if(usuarioLogado != null){
             String uid = usuarioLogado.getUid();
@@ -85,5 +116,31 @@ public class PinguSkin extends AppCompatActivity {
             }
         });
 
+        final int[] selectedIndex = { -1 };
+
+        for (int i = 0; i < imageViews.length; i++) {
+            ImageView currentImage = imageViews[i];
+            currentImage.setImageResource(id_Skins[i]);
+            final int index = i;
+
+            currentImage.setOnClickListener(view -> {
+                for (ImageView image : imageViews) {
+                    image.setBackgroundResource(R.drawable.scroll_background_unselected);
+                }
+
+                currentImage.setBackgroundResource(R.drawable.scroll_background_selected);
+
+                selectedIndex[0] = index;
+
+                int selectedImage_id = id_Skins[index];
+                aplicarSkin(selectedImage_id);
+
+            });
+        }
+
+    }
+
+    private void aplicarSkin(int skinId){
+        skinAtual.setImageResource(skinId);
     }
 }
