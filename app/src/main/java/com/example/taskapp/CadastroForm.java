@@ -88,6 +88,7 @@ public class CadastroForm extends AppCompatActivity {
         public String nome;
         public String email;
         public String senha;
+        public String plano; // novo campo
 
         public Usuario() {} // Necessário para Firebase
 
@@ -95,6 +96,7 @@ public class CadastroForm extends AppCompatActivity {
             this.nome = nome;
             this.email = email;
             this.senha = senha;
+            this.plano = "free"; // valor padrão
         }
     }
 }

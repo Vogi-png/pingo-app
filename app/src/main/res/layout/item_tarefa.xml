@@ -1,46 +1,63 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:elevation="4dp"
-    android:radius="12dp">
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="2dp"
+    app:cardElevation="5dp"
+    app:cardBackgroundColor="#FAFAFA"
+    app:useCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/borda_azul"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Título da Tarefa"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:background="@android:color/transparent" />
+        <CheckBox
+            android:id="@+id/checkConcluida"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/verde"
+            android:background="@null"
+            android:layout_marginEnd="8dp" />
 
-        <TextView
-            android:id="@+id/tvData"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Data de criação"
-            android:textSize="14sp"
-            android:textColor="#888888"
-            android:layout_marginTop="4dp"
-            android:background="@android:color/transparent" />
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/tvDescricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descrição da tarefa"
-            android:visibility="gone"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/transparent" />
+            <TextView
+                android:id="@+id/tvTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Título da Tarefa"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/azulEscuro" />
+
+            <TextView
+                android:id="@+id/tvData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Data de criação"
+                android:textSize="14sp"
+                android:textColor="@color/azulMedio2"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/tvDescricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descrição da tarefa"
+                android:visibility="gone"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:textColor="#2B3267" />
+        </LinearLayout>
+
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>

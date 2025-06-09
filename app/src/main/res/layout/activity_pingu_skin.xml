@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pinguSkinLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="#00FFFFFF">
 
     <!-- Header -->
+
     <ImageView
         android:id="@+id/headerLogo"
         android:layout_width="0dp"
@@ -16,73 +17,149 @@
         android:src="@drawable/header_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Preview do Pinguim -->
-    <ImageView
-        android:id="@+id/pinguPreview"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/pingo_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerLogo" />
 
     <!-- Nome do Pinguim -->
-    <TextView
-        android:id="@+id/pinguName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Pingo da Silva"
-        android:textColor="#40465D"
-        android:textSize="20sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/pinguPreview"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_marginBottom="270dp"
+        android:src="@drawable/pingo_default"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pinguPreview"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/nomeCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pinguPreview"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <EditText
+            android:id="@+id/id_editPingoNome"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/insert_border_select"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Pingo da Silva"
+            android:inputType="text"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="15sp"
+            tools:ignore="Autofill" />
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="405dp"
+            android:layout_height="253dp"
+            android:importantForAccessibility="no">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/skinSlot_1"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/scroll_background_selected"
+                    app:srcCompat="@drawable/pingo_default" />
+
+                <ImageView
+                    android:id="@+id/skinSlot_2"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/scroll_background_unselected"
+                    app:srcCompat="@drawable/pingo_default" />
+
+                <ImageView
+                    android:id="@+id/skinSlot_3"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/scroll_background_unselected"
+                    app:srcCompat="@drawable/pingo_default" />
+
+                <ImageView
+                    android:id="@+id/skinSlot_4"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/scroll_background_unselected"
+                    app:srcCompat="@drawable/pingo_default" />
+
+                <ImageView
+                    android:id="@+id/skinSlot_5"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/scroll_background_unselected"
+                    app:srcCompat="@drawable/pingo_default" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/id_btnSalvarPingo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="102dp"
+        android:backgroundTint="@color/azulClaro"
+        android:text="Salvar"
+        android:textColor="@color/branco"
+        app:layout_constraintBottom_toBottomOf="@+id/headerLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <!-- Lista de Skins -->
-    <ScrollView
-        android:id="@+id/skinScrollView"
+
+    <include
+        layout="@layout/bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/pinguName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:id="@+id/skinContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Exemplo de Skin -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginBottom="16dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/pingo_default"
-                android:contentDescription="Skin padrão do pinguim"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginBottom="16dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/pingo_default"
-                android:contentDescription="Skin padrão do pinguim"/>
-
-            <!-- Você pode duplicar isso ou popular depois via código -->
-
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

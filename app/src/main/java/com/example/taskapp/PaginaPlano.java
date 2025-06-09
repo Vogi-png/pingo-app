@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class PaginaPlano extends AppCompatActivity {
 
     Button btnAssinar;
@@ -24,6 +26,10 @@ public class PaginaPlano extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //barra de navegacao
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavHelper.setup(this, bottomNavigationView);
 
         btnAssinar = findViewById(R.id.btnAssinar);
         btnAssinar.setOnClickListener(v -> {

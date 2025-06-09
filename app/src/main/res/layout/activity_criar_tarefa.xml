@@ -126,11 +126,10 @@
       android:layout_height="190dp"
       android:layout_marginTop="24dp"
       android:adjustViewBounds="true"
-      android:scaleType="fitStart"
       android:src="@drawable/header_pingo"
-      app:layout_constraintTop_toBottomOf="@id/btnSalvar"
       app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-      app:layout_constraintStart_toStartOf="parent" />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/btnSalvar" />
 
   <FrameLayout
       android:id="@+id/flFragment"
@@ -141,31 +140,15 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent" />
 
-  <!-- Barra de tarefas -->
-  <com.google.android.material.bottomnavigation.BottomNavigationView
-      android:id="@+id/bottomNavigationView"
-      android:layout_width="0dp"
+
+  <include
+      layout="@layout/bottom_nav"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/azul_pingo"
-      app:menu="@menu/bottom_nav_menu"
-      app:labelVisibilityMode="labeled"
-      app:itemHorizontalTranslationEnabled="false"
-      app:itemIconTint="@android:color/white"
-      app:itemTextColor="@android:color/white"
+      android:layout_marginTop="16dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
+      app:layout_constraintEnd_toEndOf="parent"/>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-      android:id="@+id/botaomais"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="-35dp"
-      android:src="@drawable/nav_mais"
-      android:backgroundTint="@color/botao_mais"
-      app:tint="@color/white"
-      app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
