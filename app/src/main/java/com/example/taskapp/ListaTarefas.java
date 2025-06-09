@@ -54,21 +54,17 @@ public class ListaTarefas extends AppCompatActivity {
         }
         userId = user.getUid();
 
-        // RecyclerView e Adapter
         listaTarefas = new ArrayList<>();
         adapter = new TarefaAdapter(listaTarefas);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
 
-        // FAB (botão +) direto pelo findViewById
         FloatingActionButton fab = findViewById(R.id.botaomais);
         fab.setOnClickListener(v -> startActivity(new Intent(this, CriarTarefa.class)));
 
-        // BottomNavigationView direto pelo findViewById
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         BottomNavHelper.setup(this, bottomNav);
 
-        // Carregar e configurar swipe
         buscarTarefas();
         configurarSwipe();
     }
@@ -170,20 +166,18 @@ public class ListaTarefas extends AppCompatActivity {
                 listaTarefas.clear();
                 for (DataSnapshot s : snap.getChildren()) {
                     Tarefa t = s.getValue(Tarefa.class);
-                    if (t != null) listaTarefas.add(t);
+                    if (t != null && t.getConcluida() == 0) {
+                        listaTarefas.add(t);
+                    }
                 }
                 adapter.notifyDataSetChanged();
-                if (listaTarefas.isEmpty()) {
-                    Toast.makeText(ListaTarefas.this,
-                            "Nenhuma tarefa encontrada", Toast.LENGTH_SHORT).show();
-                }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError err) {
-                Toast.makeText(ListaTarefas.this,
-                        "Erro ao carregar: " + err.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                Toast.makeText(ListaTarefas.this, "Erro ao carregar: " + err.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
+
 }
