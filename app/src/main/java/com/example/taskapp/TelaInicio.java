@@ -28,7 +28,7 @@ public class TelaInicio extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(TelaInicio.this, ListaTarefas.class);
+                Intent intent = new Intent(TelaInicio.this, LoginForm.class);
                 startActivity(intent);
                 finish();
             }

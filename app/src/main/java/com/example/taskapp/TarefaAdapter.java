@@ -1,73 +1,106 @@
 package com.example.taskapp;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Paint;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taskapp.R;
-import com.example.taskapp.Tarefa;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+import android.os.Handler; // Corrigido import aqui
 
 public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder> {
 
-    private List<Tarefa> listaTarefas;
+    private List<Tarefa> lista;
+    private Context context;
 
-    public TarefaAdapter(List<Tarefa> listaTarefas) {
-        this.listaTarefas = listaTarefas;
+    public TarefaAdapter(List<Tarefa> lista) {
+        this.lista = lista;
     }
 
     @NonNull
     @Override
     public TarefaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_tarefa, parent, false);
-        return new TarefaViewHolder(itemView);
+        context = parent.getContext();
+        View item = LayoutInflater.from(context).inflate(R.layout.item_tarefa, parent, false);
+        return new TarefaViewHolder(item);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TarefaViewHolder holder, int position) {
-        Tarefa tarefa = listaTarefas.get(position);
+        Tarefa tarefa = lista.get(position);
+
         holder.tvTitulo.setText(tarefa.getTitulo());
-
-        // Formatando timestamp
-        Date date = new Date(tarefa.getDtcriacao());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
-        holder.tvData.setText(sdf.format(date));
-
+        if (tarefa.getDtcriacao() != null) {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String dataFormatada = sdf.format(new java.util.Date(tarefa.getDtcriacao()));
+            holder.tvData.setText(dataFormatada);
+        } else {
+            holder.tvData.setText("Data não disponível");
+        }
         holder.tvDescricao.setText(tarefa.getDescricao());
 
-        // Mostrar/ocultar descrição ao clicar
-        holder.itemView.setOnClickListener(v -> {
-            if (holder.tvDescricao.getVisibility() == View.GONE) {
-                holder.tvDescricao.setVisibility(View.VISIBLE);
+        holder.checkConcluida.setChecked(false); // sempre começa desmarcada
+        holder.checkConcluida.setButtonTintList(
+                ColorStateList.valueOf(ContextCompat.getColor(context, R.color.cinzaEscuro)));
+
+        holder.checkConcluida.setOnCheckedChangeListener((btn, isChecked) -> {
+            if (isChecked) {
+                // Riscado e verde
+                holder.tvTitulo.setPaintFlags(holder.tvTitulo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.checkConcluida.setButtonTintList(
+                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.verde)));
+
+                // Delay de 5s para marcar como concluída
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    DatabaseReference ref = FirebaseDatabase.getInstance()
+                            .getReference("tarefas")
+                            .child(tarefa.getId());
+
+                    ref.child("status").setValue("concluida");
+
+                    // Remover da lista com animação
+                    int pos = holder.getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        lista.remove(pos);
+                        notifyItemRemoved(pos);
+                    }
+                }, 5000);
+
             } else {
-                holder.tvDescricao.setVisibility(View.GONE);
+                holder.tvTitulo.setPaintFlags(0);
+                holder.checkConcluida.setButtonTintList(
+                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.cinzaEscuro)));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return listaTarefas.size();
+        return lista.size();
     }
 
     public static class TarefaViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitulo, tvData, tvDescricao;
+        CheckBox checkConcluida;
 
-        public TarefaViewHolder(View itemView) {
+        public TarefaViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitulo = itemView.findViewById(R.id.tvTitulo);
             tvData = itemView.findViewById(R.id.tvData);
             tvDescricao = itemView.findViewById(R.id.tvDescricao);
+            checkConcluida = itemView.findViewById(R.id.checkConcluida);
         }
     }
 }

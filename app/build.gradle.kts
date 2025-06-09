@@ -45,6 +45,7 @@ android {
 
 dependencies {
 
+    implementation(libs.firebase.firestore)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -66,6 +67,7 @@ dependencies {
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
+    implementation(libs.google.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
