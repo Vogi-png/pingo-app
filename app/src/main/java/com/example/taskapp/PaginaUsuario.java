@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.taskapp.ui.TrocarTema;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +30,9 @@ public class PaginaUsuario extends AppCompatActivity {
     FirebaseAuth auth;
     DatabaseReference databaseReference;
 
+    FloatingActionButton fab;
+    BottomNavigationView bottomNav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,15 @@ public class PaginaUsuario extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        // --- CÓDIGO MOVIDO PARA CÁ ---
+        // 2. Agora que o layout existe, inicialize suas views usando findViewById.
+        fab = findViewById(R.id.botaomais);
+        bottomNav = findViewById(R.id.bottomNavigationView);
+
+        // 3. Com as views inicializadas, configure os listeners e helpers.
+        fab.setOnClickListener(v -> startActivity(new Intent(this, CriarTarefa.class)));
+        BottomNavHelper.setup(this, bottomNav);
+
 
         //barra de navegacao
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
