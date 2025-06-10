@@ -5,9 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +35,7 @@ public class PinguHome extends AppCompatActivity {
             R.drawable.pingo_ciborgue,
             R.drawable.pingo_emo,
             R.drawable.pingo_namorados,
+            R.drawable.pingo_mother_monster,
             R.drawable.pingo_kovalski,
             R.drawable.pingo_clube_penguin,
             R.drawable.pingo_pablo,
