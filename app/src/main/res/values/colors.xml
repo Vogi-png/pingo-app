@@ -6,8 +6,7 @@
     <color name="botao_mais">#96ADFF</color>
     <color name="whiteApp">#EDEDED</color>
     <color name="cinza">#CACACA</color>
-    <color name="verde">#78E346</color>
     <color name="blueApp">#5162E6</color>
     <color name="cinzaEscuro">#808080</color>
-    <color name="verde">3CB371</color>
+    <color name="verde">#3CB371</color>
 </resources>
