@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +27,19 @@ public class PinguHome extends AppCompatActivity {
     private DatabaseReference database;
     private String nomePingo;
     private TextView txtNomePingo;
+
+    private int[] id_Skins = {
+            R.drawable.pingo_default,
+            R.drawable.pingo_jabba,
+            R.drawable.pingo_carioca,
+            R.drawable.pingo_ciborgue,
+            R.drawable.pingo_emo,
+            R.drawable.pingo_namorados,
+            R.drawable.pingo_mother_monster,
+            R.drawable.pingo_kovalski,
+            R.drawable.pingo_clube_penguin,
+            R.drawable.pingo_pablo,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,26 +91,38 @@ public class PinguHome extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         txtNomePingo = findViewById(R.id.id_pinguNameHome);
 
-        if(usuarioLogado != null){
-            String uid = usuarioLogado.getUid();
-            Log.d("myTag", "Current User ID: " + uid);
-            DatabaseReference userRef = database.child("usuarios").child(uid).child("nomePingo");
+        String uid = usuarioLogado.getUid();
+        Log.d("myTag", "Current User ID: " + uid);
+        DatabaseReference userRef = database.child("usuarios").child(uid).child("nomePingo");
+        DatabaseReference userRefSkin = database.child("usuarios").child(uid).child("skin");
 
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    nomePingo = snapshot.getValue(String.class);
-                    Log.d("myTag", "fk_nome_pingo = " + nomePingo);
-                    txtNomePingo.setText(nomePingo);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nomePingo = snapshot.getValue(String.class);
+                Log.d("myTag", "fk_nome_pingo = " + nomePingo);
+                txtNomePingo.setText(nomePingo);
 
-                }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
-                }
-            });
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+            }
+        });
+
+        userRefSkin.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int index = snapshot.getValue(int.class);
+                binding.pinguImageHome.setImageResource(id_Skins[index]);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+            }
+        });
 
         binding.btnPersonalizar.setOnClickListener(new View.OnClickListener(){
             @Override

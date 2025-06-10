@@ -24,34 +24,19 @@
 
     <ImageView
         android:id="@+id/pinguImageHome"
-        android:layout_width="412dp"
-        android:layout_height="358dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/id_pinguNameHome"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="96dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/pingo_default" />
-
-    <TextView
-        android:id="@+id/id_pinguNameHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Pingo da Silva"
-        android:textColor="@color/cinza"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinguImageHome" />
 
     <Button
         android:id="@+id/btnPersonalizar"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="220dp"
+        android:layout_height="70dp"
         android:backgroundTint="#5F8DF6"
         android:text="Personalizar"
         android:textColor="#FFFFFF"
@@ -60,21 +45,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_pinguNameHome"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintVertical_bias="0.072" />
 
-    <!-- Icone -->
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="-125dp"
-        android:layout_marginTop="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnPersonalizar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPersonalizar"
+        app:layout_constraintEnd_toEndOf="@+id/btnPersonalizar"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="@+id/btnPersonalizar"
+        app:layout_constraintTop_toTopOf="@+id/btnPersonalizar"
         app:srcCompat="@drawable/camiseta_icon" />
 
+    <TextView
+        android:id="@+id/id_pinguNameHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="532dp"
+        android:text="Pingo da Silva"
+        android:textColor="@color/cinza"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/headerLogo3" />
+
+    <!-- Icone -->
+
     <!-- Barra de tarefas -->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
