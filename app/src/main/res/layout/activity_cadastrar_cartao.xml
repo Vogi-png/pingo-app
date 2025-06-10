@@ -10,10 +10,11 @@
     <ImageView android:id="@+id/headerImage"
         android:layout_width="0dp"
         android:layout_height="230dp"
+        android:scaleType="fitXY"
         android:src="@drawable/header_prin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView android:id="@+id/textTitle"
         android:layout_width="wrap_content"
@@ -139,7 +140,7 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/insert_border_select"
                             android:gravity="center"
-                            android:hint="323"
+                            android:hint="3234"
                             android:inputType="number"
                             android:maxLength="4"
                             android:padding="13dp"

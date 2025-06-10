@@ -59,9 +59,6 @@ public class TodosCartoes extends AppCompatActivity implements CartaoAdapter.OnI
             startActivity(new Intent(this, CadastrarCartao.class));
         });
 
-        //barra de navegacao
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        BottomNavHelper.setup(this, bottomNavigationView);
     }
 
     @Override
@@ -95,7 +92,7 @@ public class TodosCartoes extends AppCompatActivity implements CartaoAdapter.OnI
                 });
     }
 
-    // Método para apagar o cartão (já existente)
+    // Método para apagar o cartão
     @Override
     public void onDeleteClick(int position) {
         Cartao cartaoParaApagar = listaDeCartoes.get(position);
