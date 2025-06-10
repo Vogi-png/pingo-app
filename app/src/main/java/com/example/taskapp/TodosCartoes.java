@@ -4,6 +4,7 @@ package com.example.taskapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -32,6 +35,7 @@ public class TodosCartoes extends AppCompatActivity implements CartaoAdapter.OnI
     private List<Cartao> listaDeCartoes;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
+    private DatabaseReference database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,9 +133,18 @@ public class TodosCartoes extends AppCompatActivity implements CartaoAdapter.OnI
 
                 // Define o botão "Confirmar" (Positivo)
                 .setPositiveButton("Confirmar", (dialog, which) -> {
-                    // CÓDIGO A SER EXECUTADO QUANDO O USUÁRIO CLICAR EM "CONFIRMAR"
-                    // Aqui você chamaria a função para resgatar o prêmio
-                    Toast.makeText(TodosCartoes.this, "Prêmio adquirido com o cartão " + cartao.getLastFourDigits(), Toast.LENGTH_LONG).show();
+                    FirebaseUser usuarioAtual = auth.getCurrentUser();
+                    String uid = usuarioAtual.getUid();
+                    database = FirebaseDatabase.getInstance().getReference();
+                    DatabaseReference userRef = database.child("usuarios").child(uid).child("plano");
+                    userRef.setValue("pro")
+                            .addOnSuccessListener(aVoid -> {
+                                Toast.makeText(TodosCartoes.this, "Prêmio adquirido com o cartão " + cartao.getLastFourDigits(), Toast.LENGTH_LONG).show();
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(TodosCartoes.this, "Erro ao concluir operação.", Toast.LENGTH_LONG).show();
+                                Log.e("Firebase", "Erro ao pagar plano", e);
+                            });
                     dialog.dismiss(); // Fecha a caixa de diálogo
                 })
 
