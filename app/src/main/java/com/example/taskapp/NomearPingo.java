@@ -26,7 +26,7 @@ public class NomearPingo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nomear_pingo);
 
-        editTextNomePingo = findViewById(R.id.id_editPingoNome);
+        editTextNomePingo = findViewById(R.id.id_editPingoNome); // ID do seu EditText para nomear o pingo
         nomear_seguirBtn = findViewById(R.id.nomear_seguirBtn);
 
         //barra de navegacao

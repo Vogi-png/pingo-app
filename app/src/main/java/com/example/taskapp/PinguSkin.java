@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,13 +22,30 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
 
+
 public class PinguSkin extends AppCompatActivity {
 
     private FirebaseUser usuarioLogado;
     private DatabaseReference database;
     private String nomePingo;
+    private boolean plano;
     private EditText txtPingo;
     private Button btnSalvarPingo;
+    private ImageView skinAtual;
+    private Integer skinAplicada;
+
+    private int[] id_Skins = {
+            R.drawable.pingo_default,
+            R.drawable.pingo_jabba,
+            R.drawable.pingo_carioca,
+            R.drawable.pingo_ciborgue,
+            R.drawable.pingo_emo,
+            R.drawable.pingo_namorados,
+            R.drawable.pingo_mother_monster,
+            R.drawable.pingo_kovalski,
+            R.drawable.pingo_clube_penguin,
+            R.drawable.pingo_pablo,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +61,74 @@ public class PinguSkin extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         txtPingo = findViewById(R.id.id_editPingoNome);
         btnSalvarPingo = findViewById(R.id.id_btnSalvarPingo);
+        skinAtual = findViewById(R.id.pinguPreview);
 
-        if(usuarioLogado != null){
-            String uid = usuarioLogado.getUid();
-            Log.d("myTag", "Current User ID: " + uid);
-            DatabaseReference userRef = database.child("usuarios").child(uid).child("nomePingo");
+        ImageView[] imageViews = {
+                findViewById(R.id.skinSlot_1),
+                findViewById(R.id.skinSlot_2),
+                findViewById(R.id.skinSlot_3),
+                findViewById(R.id.skinSlot_4),
+                findViewById(R.id.skinSlot_5),
+                findViewById(R.id.skinSlot_6),
+                findViewById(R.id.skinSlot_7),
+                findViewById(R.id.skinSlot_8),
+                findViewById(R.id.skinSlot_9),
+                findViewById(R.id.skinSlot_10),
+        };
 
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    nomePingo = snapshot.getValue(String.class);
-                    Log.d("myTag", "fk_nome_pingo = " + nomePingo);
-                    txtPingo.setText(nomePingo);
+        String uid = usuarioLogado.getUid();
+        Log.d("myTag", "Current User ID: " + uid);
+        DatabaseReference userRefPingo = database.child("usuarios").child(uid).child("nomePingo");
+        DatabaseReference userRefPlano = database.child("usuarios").child(uid).child("plano");
+        DatabaseReference userRefSkin = database.child("usuarios").child(uid).child("skin");
 
+        userRefPingo.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nomePingo = snapshot.getValue(String.class);
+                Log.d("myTag", "fk_nome_pingo = " + nomePingo);
+                txtPingo.setText(nomePingo);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Erro ao ler o nome do Pingo", Toast.LENGTH_SHORT).show();
+                Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+            }
+        });
+
+        userRefPlano.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue(String.class).equals("free")){
+                    plano = false;
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+                else{
+                    plano = true;
                 }
-            });
-        }
+                Log.d("myTag", "User has " + plano + " plan.");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Erro ao ler Plano", Toast.LENGTH_SHORT).show();
+                Log.e("myTag", "Failed to read plano", error.toException());
+            }
+        });
+
+        userRefSkin.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int index = snapshot.getValue(int.class);
+                skinAtual.setImageResource(id_Skins[index]);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+            }
+        });
 
         btnSalvarPingo.setOnClickListener(new View.OnClickListener() {
 
@@ -82,6 +147,11 @@ public class PinguSkin extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Erro ao salvar nome", Toast.LENGTH_SHORT).show();
                                 Log.e("Firebase", "Erro ao salvar nome", e);
                             });
+
+                    if(skinAplicada != null){
+                        database.child("usuarios").child(uid).child("skin").setValue(skinAplicada);
+                    }
+
                     btnSalvarPingo.setEnabled(true);
                     startActivity(new Intent(PinguSkin.this, PinguHome.class));
                 } else {
@@ -90,5 +160,38 @@ public class PinguSkin extends AppCompatActivity {
             }
         });
 
+        final int[] selectedIndex = { -1 };
+
+        for (int i = 0; i < imageViews.length; i++) {
+            ImageView currentImage = imageViews[i];
+            currentImage.setImageResource(id_Skins[i]);
+            final int index = i;
+
+            currentImage.setOnClickListener(view -> {
+                int selectedImage_id = id_Skins[index];
+                Log.d("MyTag", "Index da skin: " + selectedImage_id);
+
+                if(index <= 1 || plano) {
+                    for (ImageView image : imageViews) {
+                        image.setBackgroundResource(R.drawable.scroll_background_unselected);
+                    }
+
+                    currentImage.setBackgroundResource(R.drawable.scroll_background_selected);
+
+                    selectedIndex[0] = index;
+
+                    aplicarSkin(selectedImage_id, index);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Faça upgrade para o plano Premium para desbloquear esta skin.", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+    }
+
+    private void aplicarSkin(int skinId, int index){
+        skinAplicada = index;
+        skinAtual.setImageResource(skinId);
     }
 }
