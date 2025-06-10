@@ -21,8 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class PinguSkin extends AppCompatActivity {
 
@@ -33,6 +31,7 @@ public class PinguSkin extends AppCompatActivity {
     private EditText txtPingo;
     private Button btnSalvarPingo;
     private ImageView skinAtual;
+    private Integer skinAplicada;
 
     private int[] id_Skins = {
             R.drawable.pingo_default,
@@ -74,6 +73,7 @@ public class PinguSkin extends AppCompatActivity {
         Log.d("myTag", "Current User ID: " + uid);
         DatabaseReference userRefPingo = database.child("usuarios").child(uid).child("nomePingo");
         DatabaseReference userRefPlano = database.child("usuarios").child(uid).child("plano");
+        DatabaseReference userRefSkin = database.child("usuarios").child(uid).child("skin");
 
         userRefPingo.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -110,6 +110,19 @@ public class PinguSkin extends AppCompatActivity {
             }
         });
 
+        userRefSkin.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int index = snapshot.getValue(int.class);
+                skinAtual.setImageResource(id_Skins[index]);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+            }
+        });
+
         btnSalvarPingo.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -127,6 +140,11 @@ public class PinguSkin extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Erro ao salvar nome", Toast.LENGTH_SHORT).show();
                                 Log.e("Firebase", "Erro ao salvar nome", e);
                             });
+
+                    if(skinAplicada != null){
+                        database.child("usuarios").child(uid).child("skin").setValue(skinAplicada);
+                    }
+
                     btnSalvarPingo.setEnabled(true);
                     startActivity(new Intent(PinguSkin.this, PinguHome.class));
                 } else {
@@ -155,7 +173,7 @@ public class PinguSkin extends AppCompatActivity {
 
                     selectedIndex[0] = index;
 
-                    aplicarSkin(selectedImage_id);
+                    aplicarSkin(selectedImage_id, index);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Faça upgrade para o plano Premium para desbloquear esta skin.", Toast.LENGTH_LONG).show();
@@ -165,7 +183,8 @@ public class PinguSkin extends AppCompatActivity {
 
     }
 
-    private void aplicarSkin(int skinId){
+    private void aplicarSkin(int skinId, int index){
+        skinAplicada = index;
         skinAtual.setImageResource(skinId);
     }
 }

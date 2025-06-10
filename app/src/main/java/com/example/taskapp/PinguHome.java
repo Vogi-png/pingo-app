@@ -95,6 +95,7 @@ public class PinguHome extends AppCompatActivity {
         String uid = usuarioLogado.getUid();
         Log.d("myTag", "Current User ID: " + uid);
         DatabaseReference userRef = database.child("usuarios").child(uid).child("nomePingo");
+        DatabaseReference userRefSkin = database.child("usuarios").child(uid).child("skin");
 
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -103,6 +104,19 @@ public class PinguHome extends AppCompatActivity {
                 Log.d("myTag", "fk_nome_pingo = " + nomePingo);
                 txtNomePingo.setText(nomePingo);
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("myTag", "Failed to read fk_nome_pingo", error.toException());
+            }
+        });
+
+        userRefSkin.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int index = snapshot.getValue(int.class);
+                binding.pinguImageHome.setImageResource(id_Skins[index]);
             }
 
             @Override
