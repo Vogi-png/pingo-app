@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -30,8 +28,9 @@ public class PinguSkin extends AppCompatActivity {
     private String nomePingo;
     private boolean plano;
     private EditText txtPingo;
-    private Button btnSalvarPingo;
+    private ImageView btnSalvarPingo;
     private ImageView skinAtual;
+    private ImageView btnVoltar;
     private Integer skinAplicada;
 
     private int[] id_Skins = {
@@ -53,14 +52,11 @@ public class PinguSkin extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pingu_skin);
 
-        //barra de navegacao
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        BottomNavHelper.setup(this, bottomNavigationView);
-
         usuarioLogado = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance().getReference();
         txtPingo = findViewById(R.id.id_editPingoNome);
-        btnSalvarPingo = findViewById(R.id.id_btnSalvarPingo);
+        btnSalvarPingo = findViewById(R.id.id_btnSalvar);
+        btnVoltar = findViewById(R.id.btn_voltarPingoHome);
         skinAtual = findViewById(R.id.pinguPreview);
 
         ImageView[] imageViews = {
@@ -138,25 +134,25 @@ public class PinguSkin extends AppCompatActivity {
                 String uid = usuarioLogado.getUid();
 
                 if(!novoNome.isEmpty()){
-                    btnSalvarPingo.setEnabled(false);
                     database.child("usuarios").child(uid).child("nomePingo").setValue(novoNome)
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(getApplicationContext(), "Nome salvo com sucesso!", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
                                 Toast.makeText(getApplicationContext(), "Erro ao salvar nome", Toast.LENGTH_SHORT).show();
-                                Log.e("Firebase", "Erro ao salvar nome", e);
+                                Log.e("myTag", "Erro ao salvar nome", e);
                             });
-
-                    if(skinAplicada != null){
-                        database.child("usuarios").child(uid).child("skin").setValue(skinAplicada);
-                    }
-
-                    btnSalvarPingo.setEnabled(true);
-                    startActivity(new Intent(PinguSkin.this, PinguHome.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "Digite um nome válido", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PinguSkin.this, PinguHome.class);
+                startActivity(intent);
             }
         });
 
@@ -191,7 +187,15 @@ public class PinguSkin extends AppCompatActivity {
     }
 
     private void aplicarSkin(int skinId, int index){
-        skinAplicada = index;
-        skinAtual.setImageResource(skinId);
+        try{
+            skinAplicada = index;
+            skinAtual.setImageResource(skinId);
+            String uid = usuarioLogado.getUid();
+            database.child("usuarios").child(uid).child("skin").setValue(skinAplicada);
+            Toast.makeText(getApplicationContext(), "Skin alterada com sucesso!", Toast.LENGTH_SHORT).show();
+        } catch(Exception e){
+            Toast.makeText(getApplicationContext(), "Erro ao alterar skin.", Toast.LENGTH_SHORT).show();
+            Log.e("myTag", "Erro ao salvar skin: " + e);
+        }
     }
 }
