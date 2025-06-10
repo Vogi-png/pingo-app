@@ -18,6 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:importantForAccessibility="no"
         tools:visibility="visible" />
 
     <!-- Preview do Pinguim -->
@@ -34,6 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.75"
+        android:importantForAccessibility="no"
         tools:visibility="visible" />
 
     <androidx.cardview.widget.CardView
@@ -97,6 +99,7 @@
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_selected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />
@@ -107,6 +110,7 @@
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_unselected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />
@@ -117,6 +121,7 @@
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_unselected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />
@@ -127,6 +132,7 @@
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_unselected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />
@@ -137,6 +143,7 @@
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_unselected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />
@@ -147,6 +154,7 @@
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_unselected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />
@@ -157,6 +165,7 @@
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_unselected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />
@@ -167,6 +176,7 @@
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_unselected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />
@@ -177,6 +187,18 @@
                     android:layout_height="250dp"
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
+                    android:importantForAccessibility="no"
+                    android:background="@drawable/scroll_background_unselected"
+                    android:paddingTop="10dp"
+                    app:srcCompat="@drawable/pingo_default" />
+
+                <ImageView
+                    android:id="@+id/skinSlot_10"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:importantForAccessibility="no"
                     android:background="@drawable/scroll_background_unselected"
                     android:paddingTop="10dp"
                     app:srcCompat="@drawable/pingo_default" />

@@ -40,6 +40,7 @@ public class PinguSkin extends AppCompatActivity {
             R.drawable.pingo_ciborgue,
             R.drawable.pingo_emo,
             R.drawable.pingo_namorados,
+            R.drawable.pingo_mother_monster,
             R.drawable.pingo_kovalski,
             R.drawable.pingo_clube_penguin,
             R.drawable.pingo_pablo,
@@ -67,6 +68,7 @@ public class PinguSkin extends AppCompatActivity {
                 findViewById(R.id.skinSlot_7),
                 findViewById(R.id.skinSlot_8),
                 findViewById(R.id.skinSlot_9),
+                findViewById(R.id.skinSlot_10),
         };
 
         String uid = usuarioLogado.getUid();
