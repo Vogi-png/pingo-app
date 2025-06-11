@@ -32,7 +32,6 @@
                 android:textSize="18sp"
                 android:textColor="@color/azulEscuro" />
 
-            <!-- Substituí o layout horizontal por dois TextViews em sequência -->
             <TextView
                 android:id="@+id/tvData"
                 android:layout_width="match_parent"
