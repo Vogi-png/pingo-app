@@ -38,9 +38,16 @@ public class TarefaAdapterConcluidas extends RecyclerView.Adapter<TarefaAdapterC
         holder.tvTitulo.setText(tarefa.getTitulo());
         holder.tvDescricao.setText(tarefa.getDescricao());
 
-        // Formatar timestamps para datas legíveis
         holder.tvData.setText("Criada: " + formatarData(tarefa.getDtcriacao()));
         holder.tvDataConclusao.setText("Concluída: " + formatarData(tarefa.getDtconclusao()));
+
+        holder.itemView.setOnClickListener(v -> {
+            if (holder.tvDescricao.getVisibility() == View.GONE) {
+                holder.tvDescricao.setVisibility(View.VISIBLE);
+            } else {
+                holder.tvDescricao.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override

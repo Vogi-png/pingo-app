@@ -27,10 +27,6 @@ public class PaginaPlano extends AppCompatActivity {
             return insets;
         });
 
-        //barra de navegacao
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        BottomNavHelper.setup(this, bottomNavigationView);
-
         btnAssinar = findViewById(R.id.btnAssinar);
         btnAssinar.setOnClickListener(v -> {
             Intent intent = new Intent(PaginaPlano.this, TodosCartoes.class);
