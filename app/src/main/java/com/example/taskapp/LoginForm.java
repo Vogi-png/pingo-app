@@ -35,15 +35,55 @@ public class LoginForm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_form);
 
         auth = FirebaseAuth.getInstance();
         usersRef = FirebaseDatabase.getInstance().getReference("usuarios");
 
+        // Verifica se há usuário logado
+        if (auth.getCurrentUser() != null) {
+            FirebaseUser user = auth.getCurrentUser();
+            String uid = user.getUid();
+
+            usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String nome = snapshot.child("nome").getValue(String.class);
+                        String email = snapshot.child("email").getValue(String.class);
+
+                        Intent intent = new Intent(LoginForm.this, ListaTarefas.class);
+                        intent.putExtra("nomeUsuario", nome);
+                        intent.putExtra("emailUsuario", email);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Se não encontrar o usuário no banco, continua para tela de login
+                        setContentView(R.layout.activity_login_form);
+                        inicializarComponentes();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(LoginForm.this, "Erro ao acessar banco: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    setContentView(R.layout.activity_login_form);
+                    inicializarComponentes();
+                }
+            });
+        } else {
+            // Nenhum usuário logado, continua para a tela de login
+            setContentView(R.layout.activity_login_form);
+            inicializarComponentes();
+        }
+    }
+
+    private void inicializarComponentes() {
         inputEmail = findViewById(R.id.id_login_insertEmail);
         inputSenha = findViewById(R.id.id_login_insertSenha);
         btnLogin = findViewById(R.id.id_confirmLogin);
         progressDialog = new ProgressDialog(this);
+        auth = FirebaseAuth.getInstance();
+        usersRef = FirebaseDatabase.getInstance().getReference("usuarios");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

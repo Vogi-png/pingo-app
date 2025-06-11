@@ -2,28 +2,30 @@ package com.example.taskapp;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
-import android.os.Handler; // Corrigido import aqui
+import android.widget.Toast;
 
 public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder> {
 
     private List<Tarefa> lista;
     private Context context;
+    private int maxFavoritos = 3;
 
     public TarefaAdapter(List<Tarefa> lista) {
         this.lista = lista;
@@ -42,48 +44,47 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
         Tarefa tarefa = lista.get(position);
 
         holder.tvTitulo.setText(tarefa.getTitulo());
-        if (tarefa.getDtcriacao() != null) {
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
-            String dataFormatada = sdf.format(new java.util.Date(tarefa.getDtcriacao()));
-            holder.tvData.setText(dataFormatada);
+
+        boolean isFavorito = "sim".equals(tarefa.getFavoritos());
+        if (isFavorito) {
+            holder.imgFavorito.setColorFilter(Color.parseColor("#ffd700")); // amarelo
         } else {
-            holder.tvData.setText("Data não disponível");
+            holder.imgFavorito.setColorFilter(Color.GRAY); // cinza padrão
         }
-        holder.tvDescricao.setText(tarefa.getDescricao());
 
-        holder.checkConcluida.setChecked(false); // sempre começa desmarcada
-        holder.checkConcluida.setButtonTintList(
-                ColorStateList.valueOf(ContextCompat.getColor(context, R.color.cinzaEscuro)));
+        holder.imgFavorito.setOnClickListener(v -> {
+            // Conta quantos já estão favoritos
+            int favoritosCount = 0;
+            for (Tarefa t : lista) {
+                if ("sim".equals(t.getFavoritos())) {
+                    favoritosCount++;
+                }
+            }
 
-        holder.checkConcluida.setOnCheckedChangeListener((btn, isChecked) -> {
-            if (isChecked) {
-                holder.tvTitulo.setPaintFlags(holder.tvTitulo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                holder.checkConcluida.setButtonTintList(
-                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.verde)));
-
-                new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                    DatabaseReference ref = FirebaseDatabase.getInstance()
-                            .getReference("tarefas")
-                            .child(tarefa.getId());
-
-                    //atualiza o campo do firebase
-                    ref.child("status").setValue("concluida");
-                    ref.child("dtconclusao").setValue(System.currentTimeMillis());
-
-
-                    int pos = holder.getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION) {
-                        lista.remove(pos);
-                        notifyItemRemoved(pos);
-                    }
-                }, 5000);
-
+            if (isFavorito) {
+                atualizarFavorito(tarefa, "nao");
+                holder.imgFavorito.setColorFilter(Color.GRAY);
             } else {
-                holder.tvTitulo.setPaintFlags(0);
-                holder.checkConcluida.setButtonTintList(
-                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.cinzaEscuro)));
+                if (favoritosCount >= maxFavoritos) {
+                    Toast.makeText(context, "Limite de 3 tarefas favoritas atingido", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Favoritar
+                    atualizarFavorito(tarefa, "sim");
+                    holder.imgFavorito.setColorFilter(Color.parseColor("#ffd700"));
+                }
             }
         });
+    }
+
+    private void atualizarFavorito(Tarefa tarefa, String valor) {
+        // Atualiza localmente para refletir o estado imediatamente
+        tarefa.setFavoritos(valor);
+
+        // Atualiza no Firebase
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("tarefas")
+                .child(tarefa.getId());
+        ref.child("favoritos").setValue(valor);
     }
 
     @Override
@@ -94,6 +95,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
     public static class TarefaViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitulo, tvData, tvDescricao;
         CheckBox checkConcluida;
+        ImageView imgFavorito;
 
         public TarefaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,6 +103,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
             tvData = itemView.findViewById(R.id.tvData);
             tvDescricao = itemView.findViewById(R.id.tvDescricao);
             checkConcluida = itemView.findViewById(R.id.checkConcluida);
+            imgFavorito = itemView.findViewById(R.id.imgFavorito);
         }
     }
 }
