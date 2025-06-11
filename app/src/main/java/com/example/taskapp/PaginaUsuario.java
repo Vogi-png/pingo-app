@@ -8,9 +8,6 @@ import android.widget.Toast;
 import android.content.Intent;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.taskapp.ui.TrocarTema;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,7 +28,6 @@ public class PaginaUsuario extends AppCompatActivity {
     DatabaseReference databaseReference;
 
     FloatingActionButton fab;
-    BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +35,11 @@ public class PaginaUsuario extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pagina_usuario);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
         fab = findViewById(R.id.botaomais);
-        bottomNav = findViewById(R.id.bottomNavigationView);
 
         fab.setOnClickListener(v -> startActivity(new Intent(this, CriarTarefa.class)));
-        BottomNavHelper.setup(this, bottomNav);
 
+        //barra de navegacao
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavHelper.setup(this, bottomNavigationView);
 

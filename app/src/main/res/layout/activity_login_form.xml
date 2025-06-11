@@ -111,11 +111,22 @@
 
     </androidx.cardview.widget.CardView>
 
+    <CheckBox
+        android:id="@+id/checkbox_lembrar_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Manter conectado"
+        android:textColor="#404040"
+        app:layout_constraintStart_toStartOf="@+id/passwordCardView"
+        app:layout_constraintTop_toBottomOf="@+id/passwordCardView" />
+
+
     <Button
         android:id="@+id/id_confirmLogin"
         android:layout_width="252dp"
         android:layout_height="56dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="#96ADFF"
         android:text="Login"
         android:textColor="#40465D"
@@ -123,13 +134,13 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_lembrar_me" />
 
     <TextView
         android:id="@+id/id_redirectCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="Não possui cadastro?"
         android:textColor="#5162E6"
         android:textSize="16dp"
