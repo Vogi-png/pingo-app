@@ -24,12 +24,6 @@ public class TrocarTema extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_trocar_tema);
 
-        fab = findViewById(R.id.botaomais);
-        bottomNav = findViewById(R.id.bottomNavigationView);
-
-        fab.setOnClickListener(v -> startActivity(new Intent(this, CriarTarefa.class)));
-        BottomNavHelper.setup(this, bottomNav);
-
         Button btnTemaClaro = findViewById(R.id.btnTemaClaro);
         btnTemaClaro.setOnClickListener(v -> {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

@@ -8,7 +8,6 @@ public class Tarefa {
     private String status;
     private Long dtcriacao;
     private Long dtconclusao;
-    private String favoritos = "nao";
 
     public Tarefa() {}
 
@@ -42,8 +41,5 @@ public class Tarefa {
 
     public Long getDtconclusao() { return dtconclusao; }
     public void setDtconclusao(Long dtconclusao) { this.dtconclusao = dtconclusao; }
-
-    public String getFavoritos() { return favoritos; }
-    public void setFavoritos(String favorito) { this.favoritos = favoritos; }
 
 }

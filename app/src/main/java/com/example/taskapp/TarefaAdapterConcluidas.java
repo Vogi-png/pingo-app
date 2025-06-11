@@ -27,7 +27,7 @@ public class TarefaAdapterConcluidas extends RecyclerView.Adapter<TarefaAdapterC
     @Override
     public TarefaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View item = LayoutInflater.from(context).inflate(R.layout.item_tarefa_concluida,     parent, false);
+        View item = LayoutInflater.from(context).inflate(R.layout.item_tarefa_concluida, parent, false);
         return new TarefaViewHolder(item);
     }
 
@@ -41,20 +41,14 @@ public class TarefaAdapterConcluidas extends RecyclerView.Adapter<TarefaAdapterC
         holder.tvData.setText("Criada: " + formatarData(tarefa.getDtcriacao()));
         holder.tvDataConclusao.setText("Concluída: " + formatarData(tarefa.getDtconclusao()));
 
-        holder.tvDescricao.setVisibility(View.GONE);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.tvDescricao.getVisibility() == View.GONE) {
-                    holder.tvDescricao.setVisibility(View.VISIBLE);
-                } else {
-                    holder.tvDescricao.setVisibility(View.GONE);
-                }
+        holder.itemView.setOnClickListener(v -> {
+            if (holder.tvDescricao.getVisibility() == View.GONE) {
+                holder.tvDescricao.setVisibility(View.VISIBLE);
+            } else {
+                holder.tvDescricao.setVisibility(View.GONE);
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

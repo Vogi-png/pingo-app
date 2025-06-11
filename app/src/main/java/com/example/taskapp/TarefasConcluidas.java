@@ -40,8 +40,6 @@ public class TarefasConcluidas extends AppCompatActivity {
             Toast.makeText(this, "Usuário não autenticado", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(TarefasConcluidas.this, LoginForm.class));
         }
-
-        buscarTarefasConcluidas();
     }
 
     private void buscarTarefasConcluidas() {

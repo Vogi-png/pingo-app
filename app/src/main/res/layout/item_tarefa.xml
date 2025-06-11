@@ -59,13 +59,5 @@
                 android:layout_marginTop="8dp"
                 android:textColor="#2B3267" />
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imgFavorito"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/icon_estrela"
-            android:layout_marginRight="20dp" />
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

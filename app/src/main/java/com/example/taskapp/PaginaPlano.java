@@ -19,10 +19,6 @@ public class PaginaPlano extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pagina_plano);
 
-        //barra de navegacao
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        BottomNavHelper.setup(this, bottomNavigationView);
-
         btnAssinar = findViewById(R.id.btnAssinar);
         btnAssinar.setOnClickListener(v -> {
             Intent intent = new Intent(PaginaPlano.this, TodosCartoes.class);
