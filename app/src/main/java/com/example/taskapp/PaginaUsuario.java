@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class PaginaUsuario extends AppCompatActivity {
 
-    Button button7, button8, button9, button10;
+    Button button7, button8, button9, button10, button11;
     TextView tvNome, tvEmail;
 
     FirebaseAuth auth;
@@ -44,14 +44,13 @@ public class PaginaUsuario extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         fab = findViewById(R.id.botaomais);
         bottomNav = findViewById(R.id.bottomNavigationView);
 
         fab.setOnClickListener(v -> startActivity(new Intent(this, CriarTarefa.class)));
         BottomNavHelper.setup(this, bottomNav);
 
-
-        //barra de navegacao
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavHelper.setup(this, bottomNavigationView);
 
@@ -76,6 +75,18 @@ public class PaginaUsuario extends AppCompatActivity {
         button9 = findViewById(R.id.button9);
         button9.setOnClickListener(v -> {
             startActivity(new Intent(PaginaUsuario.this, TrocarTema.class));
+        });
+
+        button11 = findViewById(R.id.button11);
+        button11.setOnClickListener(v -> {
+            // Logout do Firebase
+            auth.signOut();
+
+            // Redirecionar para tela de login e limpar histórico de navegação
+            Intent intent = new Intent(PaginaUsuario.this, LoginForm.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
 
         // Inicializar Firebase

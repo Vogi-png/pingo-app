@@ -118,6 +118,18 @@
             app:iconPadding="-130dp"
             app:iconSize="28dp" />
 
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#5F8DF6"
+            android:text="Sair da Conta"
+            app:cornerRadius="10dp"
+            app:icon="@drawable/img_logg"
+            app:iconPadding="-130dp"
+            app:iconSize="28dp" />
+
     </LinearLayout>
 
     <include

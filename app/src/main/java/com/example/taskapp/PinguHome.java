@@ -55,6 +55,21 @@ public class PinguHome extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavHelper.setup(this, bottomNavigationView);
 
+        binding.pinguImageHome.setOnClickListener(v -> {
+            startActivity(new Intent(this, CriarTarefa.class));
+        });
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.sompingu);
+
+        binding.pinguImageHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mediaPlayer != null) {
+                    mediaPlayer.start(); // Toca o som
+                }
+            }
+        });
+
         usuarioLogado = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance().getReference();
         txtNomePingo = findViewById(R.id.id_pinguNameHome);
