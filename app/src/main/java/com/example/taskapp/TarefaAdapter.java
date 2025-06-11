@@ -2,16 +2,17 @@ package com.example.taskapp;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +25,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
 
     private List<Tarefa> lista;
     private Context context;
+    private int maxFavoritos = 3;
 
     public TarefaAdapter(List<Tarefa> lista) {
         this.lista = lista;
@@ -42,10 +44,10 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
         Tarefa tarefa = lista.get(position);
 
         holder.tvTitulo.setText(tarefa.getTitulo());
-        if (tarefa.getDtcriacao() != null) {
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
-            String dataFormatada = sdf.format(new java.util.Date(tarefa.getDtcriacao()));
-            holder.tvData.setText(dataFormatada);
+
+        boolean isFavorito = "sim".equals(tarefa.getFavoritos());
+        if (isFavorito) {
+            holder.imgFavorito.setColorFilter(Color.parseColor("#ffd700")); // amarelo
         } else {
             holder.tvData.setText("Data não disponível");
         }
@@ -106,6 +108,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
     public static class TarefaViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitulo, tvData, tvDescricao;
         CheckBox checkConcluida;
+        ImageView imgFavorito;
 
         public TarefaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -113,6 +116,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
             tvData = itemView.findViewById(R.id.tvData);
             tvDescricao = itemView.findViewById(R.id.tvDescricao);
             checkConcluida = itemView.findViewById(R.id.checkConcluida);
+            imgFavorito = itemView.findViewById(R.id.imgFavorito);
         }
     }
 }

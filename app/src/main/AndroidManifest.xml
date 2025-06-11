@@ -19,7 +19,9 @@
             android:exported="false" />
         <activity
             android:name=".TarefasConcluidas"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/title_activity_tarefa_concluida"
+            android:theme="@style/Theme.PingoToDoList" />
         <activity
             android:name=".PinguSkin"
             android:exported="false" />

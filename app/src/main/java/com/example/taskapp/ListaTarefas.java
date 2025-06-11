@@ -164,6 +164,11 @@ public class ListaTarefas extends AppCompatActivity {
                         listaTarefas.add(t);
                     }
                 }
+                listaTarefas.sort((t1, t2) -> {
+                    boolean fav1 = "sim".equals(t1.getFavoritos());
+                    boolean fav2 = "sim".equals(t2.getFavoritos());
+                    return Boolean.compare(fav2, fav1); // fav2 antes de fav1
+                });
                 adapter.notifyDataSetChanged();
             }
 

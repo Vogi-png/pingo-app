@@ -11,13 +11,14 @@ public class Tarefa {
 
     public Tarefa() {}
 
-    public Tarefa(String id, String fk_id_usuarios, String titulo, String descricao, String status, Long dtcriacao) {
+    public Tarefa(String id, String fk_id_usuarios, String titulo, String descricao, String status, Long dtcriacao, Long dtconclusao) {
         this.id = id;
         this.fk_id_usuarios = fk_id_usuarios;
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = status;
         this.dtcriacao = dtcriacao;
+        this.dtconclusao = dtconclusao;
     }
 
     public String getId() { return id; }
@@ -40,4 +41,5 @@ public class Tarefa {
 
     public Long getDtconclusao() { return dtconclusao; }
     public void setDtconclusao(Long dtconclusao) { this.dtconclusao = dtconclusao; }
+
 }
