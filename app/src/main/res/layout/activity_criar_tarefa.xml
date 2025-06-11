@@ -8,30 +8,46 @@
     android:layout_height="match_parent"
     tools:context=".CriarTarefa">
 
-  <!-- Imagem topo -->
   <ImageView
-      android:id="@+id/imageViewHeader"
+      android:id="@+id/imageView3"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:adjustViewBounds="true"
       android:scaleType="fitXY"
-      android:src="@drawable/header_criar_tarefa"
-      app:layout_constraintTop_toTopOf="parent"
+      android:src="@drawable/header_tarefa_sem_titulo"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/tvCriarTarefa"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="Criar Tarefa:"
+      android:textSize="25dp"
+      android:textStyle="bold"
+      android:textColor="@color/azulEscuro"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginBottom="12dp"
+      app:layout_constraintTop_toBottomOf="@id/imageView3"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_goneMarginBottom="50dp"
       app:layout_constraintEnd_toEndOf="parent" />
 
-  <!-- Label Título -->
   <TextView
       android:id="@+id/tvTituloLabel"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="40dp"
-      android:layout_marginTop="24dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="12dp"
       android:layout_marginEnd="32dp"
       android:text="Título"
       android:textColor="#1D275C"
       android:textSize="17sp"
-      app:layout_constraintTop_toBottomOf="@id/imageViewHeader"
+      app:layout_constraintTop_toBottomOf="@id/tvCriarTarefa"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent" />
 
@@ -41,12 +57,12 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="32dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginTop="48dp"
       android:layout_marginEnd="32dp"
       app:cardBackgroundColor="@android:color/transparent"
       app:cardCornerRadius="25dp"
       app:cardElevation="4dp"
-      app:layout_constraintTop_toBottomOf="@id/tvTituloLabel"
+      app:layout_constraintTop_toBottomOf="@id/tvCriarTarefa"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent">
 
