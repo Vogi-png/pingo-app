@@ -42,8 +42,11 @@ public class LoginForm extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         usersRef = FirebaseDatabase.getInstance().getReference("usuarios");
 
+        SharedPreferences sharedPreferences = getSharedPreferences("com.example.taskapp.PREFS", MODE_PRIVATE);
+        boolean lembrarMe = sharedPreferences.getBoolean("KEY_REMEMBER_ME", false);
+
         // Verifica se há usuário logado
-        if (auth.getCurrentUser() != null) {
+        if (auth.getCurrentUser() != null && lembrarMe) {
             FirebaseUser user = auth.getCurrentUser();
             String uid = user.getUid();
 
@@ -74,7 +77,7 @@ public class LoginForm extends AppCompatActivity {
                 }
             });
         } else {
-            // Nenhum usuário logado, continua para a tela de login
+            // Não está logado OU não quer continuar logado
             setContentView(R.layout.activity_login_form);
             inicializarComponentes();
         }
