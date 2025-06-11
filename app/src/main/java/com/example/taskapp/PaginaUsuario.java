@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class PaginaUsuario extends AppCompatActivity {
 
-    Button button7, button9, button10;
+    Button button7, button8, button9, button10;
     TextView tvNome, tvEmail;
 
     FirebaseAuth auth;
@@ -44,12 +44,9 @@ public class PaginaUsuario extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // --- CÓDIGO MOVIDO PARA CÁ ---
-        // 2. Agora que o layout existe, inicialize suas views usando findViewById.
         fab = findViewById(R.id.botaomais);
         bottomNav = findViewById(R.id.bottomNavigationView);
 
-        // 3. Com as views inicializadas, configure os listeners e helpers.
         fab.setOnClickListener(v -> startActivity(new Intent(this, CriarTarefa.class)));
         BottomNavHelper.setup(this, bottomNav);
 
@@ -58,13 +55,17 @@ public class PaginaUsuario extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavHelper.setup(this, bottomNavigationView);
 
-        // Referências dos TextViews para mostrar nome e email
         tvNome = findViewById(R.id.tvNome);
         tvEmail = findViewById(R.id.tvEmail);
 
         button7 = findViewById(R.id.button7);
         button7.setOnClickListener(v -> {
             startActivity(new Intent(PaginaUsuario.this, PaginaPlano.class));
+        });
+
+        button8 = findViewById(R.id.button8);
+        button8.setOnClickListener(v -> {
+            startActivity(new Intent(PaginaUsuario.this, TarefasConcluidas.class));
         });
 
         button10 = findViewById(R.id.button10);

@@ -57,20 +57,20 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
 
         holder.checkConcluida.setOnCheckedChangeListener((btn, isChecked) -> {
             if (isChecked) {
-                // Riscado e verde
                 holder.tvTitulo.setPaintFlags(holder.tvTitulo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 holder.checkConcluida.setButtonTintList(
                         ColorStateList.valueOf(ContextCompat.getColor(context, R.color.verde)));
 
-                // Delay de 5s para marcar como concluída
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     DatabaseReference ref = FirebaseDatabase.getInstance()
                             .getReference("tarefas")
                             .child(tarefa.getId());
 
+                    //atualiza o campo do firebase
                     ref.child("status").setValue("concluida");
+                    ref.child("dtconclusao").setValue(System.currentTimeMillis());
 
-                    // Remover da lista com animação
+
                     int pos = holder.getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         lista.remove(pos);
