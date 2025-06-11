@@ -55,7 +55,7 @@ public class PinguHome extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavHelper.setup(this, bottomNavigationView);
 
-        binding.botaomais.setOnClickListener(v -> {
+        binding.pinguImageHome.setOnClickListener(v -> {
             startActivity(new Intent(this, CriarTarefa.class));
         });
 
