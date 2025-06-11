@@ -126,7 +126,7 @@
             android:backgroundTint="#5F8DF6"
             android:text="Sair da Conta"
             app:cornerRadius="10dp"
-            app:icon="@drawable/icon_logg"
+            app:icon="@drawable/img_logg"
             app:iconPadding="-130dp"
             app:iconSize="28dp" />
 
