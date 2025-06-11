@@ -38,8 +38,6 @@ public class PaginaUsuario extends AppCompatActivity {
         fab = findViewById(R.id.botaomais);
 
         fab.setOnClickListener(v -> startActivity(new Intent(this, CriarTarefa.class)));
-        BottomNavHelper.setup(this, bottomNav);
-
 
         //barra de navegacao
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
