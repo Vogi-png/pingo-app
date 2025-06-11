@@ -45,7 +45,6 @@ public class ListaTarefas extends AppCompatActivity {
         binding = ActivityListaTarefasBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Autenticação
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             Toast.makeText(this, "Usuário não autenticado.", Toast.LENGTH_LONG).show();
@@ -71,19 +70,17 @@ public class ListaTarefas extends AppCompatActivity {
 
     private void configurarSwipe() {
         ItemTouchHelper.SimpleCallback simpleCallback =
-                new ItemTouchHelper.SimpleCallback(0,
-                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
                     @Override
-                    public boolean onMove(@NonNull androidx.recyclerview.widget.RecyclerView rv,
-                                          @NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder vh,
-                                          @NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder target) {
+                    public boolean onMove(@NonNull RecyclerView rv,
+                                          @NonNull RecyclerView.ViewHolder vh,
+                                          @NonNull RecyclerView.ViewHolder target) {
                         return false;
                     }
 
                     @Override
-                    public void onSwiped(@NonNull androidx.recyclerview.widget.RecyclerView.ViewHolder vh,
-                                         int direction) {
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder vh, int direction) {
                         int pos = vh.getAdapterPosition();
                         Tarefa t = listaTarefas.get(pos);
 
@@ -106,8 +103,7 @@ public class ListaTarefas extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onChildDraw(@NonNull Canvas c,
-                                            @NonNull RecyclerView recyclerView,
+                    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
                                             @NonNull RecyclerView.ViewHolder viewHolder,
                                             float dX, float dY,
                                             int actionState, boolean isCurrentlyActive) {
@@ -116,13 +112,12 @@ public class ListaTarefas extends AppCompatActivity {
 
                         View itemView = viewHolder.itemView;
                         Paint paint = new Paint();
-
                         int iconMargin = 50;
                         int iconTop = itemView.getTop() + (itemView.getHeight() - 100) / 2;
                         int iconBottom = iconTop + 100;
 
-                        if (dX > 0) { // Direita (editar)
-                            paint.setColor(Color.parseColor("#2196F3")); // azul
+                        if (dX > 0) {
+                            paint.setColor(Color.parseColor("#2196F3"));
                             c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(),
                                     (float) itemView.getLeft() + dX, (float) itemView.getBottom(), paint);
 
@@ -134,8 +129,8 @@ public class ListaTarefas extends AppCompatActivity {
                                 icon.draw(c);
                             }
 
-                        } else if (dX < 0) { // Esquerda (excluir)
-                            paint.setColor(Color.parseColor("#F44336")); // vermelho
+                        } else if (dX < 0) {
+                            paint.setColor(Color.parseColor("#F44336"));
                             c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
                                     (float) itemView.getRight(), (float) itemView.getBottom(), paint);
 
@@ -152,7 +147,6 @@ public class ListaTarefas extends AppCompatActivity {
 
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(binding.recyclerView);
     }
-
 
     private void buscarTarefas() {
         Query q = FirebaseDatabase.getInstance()
@@ -179,5 +173,4 @@ public class ListaTarefas extends AppCompatActivity {
             }
         });
     }
-
 }

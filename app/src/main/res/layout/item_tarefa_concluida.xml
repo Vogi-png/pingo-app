@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -36,10 +37,19 @@
                 android:id="@+id/tvData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Data de criação"
+                android:text="Criada: 01/01/2024"
                 android:textSize="14sp"
                 android:textColor="@color/azulMedio2"
                 android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/tvDataConclusao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Concluída: 03/01/2024"
+                android:textSize="14sp"
+                android:textColor="@color/azulMedio2"
+                android:layout_marginTop="2dp" />
 
             <TextView
                 android:id="@+id/tvDescricao"

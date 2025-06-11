@@ -58,7 +58,6 @@ public class PaginaUsuario extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         BottomNavHelper.setup(this, bottomNavigationView);
 
-        // Referências dos TextViews para mostrar nome e email
         tvNome = findViewById(R.id.tvNome);
         tvEmail = findViewById(R.id.tvEmail);
 

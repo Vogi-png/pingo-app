@@ -15,6 +15,9 @@
         android:theme="@style/Theme.PingoToDoList"
         tools:targetApi="31">
         <activity
+            android:name=".TarefaAdapterConcluidas"
+            android:exported="false" />
+        <activity
             android:name=".TarefasConcluidas"
             android:exported="false" />
         <activity

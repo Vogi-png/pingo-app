@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
-import android.os.Handler; // Corrigido import aqui
+import android.os.Handler;
 
 public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder> {
 
@@ -51,26 +51,28 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
         }
         holder.tvDescricao.setText(tarefa.getDescricao());
 
+        // Começa com descrição oculta
+        holder.tvDescricao.setVisibility(View.GONE);
+
         holder.checkConcluida.setChecked(false); // sempre começa desmarcada
         holder.checkConcluida.setButtonTintList(
                 ColorStateList.valueOf(ContextCompat.getColor(context, R.color.cinzaEscuro)));
 
         holder.checkConcluida.setOnCheckedChangeListener((btn, isChecked) -> {
             if (isChecked) {
-                // Riscado e verde
                 holder.tvTitulo.setPaintFlags(holder.tvTitulo.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 holder.checkConcluida.setButtonTintList(
                         ColorStateList.valueOf(ContextCompat.getColor(context, R.color.verde)));
 
-                // Delay de 5s para marcar como concluída
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     DatabaseReference ref = FirebaseDatabase.getInstance()
                             .getReference("tarefas")
                             .child(tarefa.getId());
 
+                    // Atualiza o status no Firebase
                     ref.child("status").setValue("concluida");
+                    ref.child("dtconclusao").setValue(System.currentTimeMillis());
 
-                    // Remover da lista com animação
                     int pos = holder.getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         lista.remove(pos);
@@ -84,7 +86,17 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.TarefaView
                         ColorStateList.valueOf(ContextCompat.getColor(context, R.color.cinzaEscuro)));
             }
         });
+
+        // Clique no item para mostrar/ocultar descrição
+        holder.itemView.setOnClickListener(v -> {
+            if (holder.tvDescricao.getVisibility() == View.GONE) {
+                holder.tvDescricao.setVisibility(View.VISIBLE);
+            } else {
+                holder.tvDescricao.setVisibility(View.GONE);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

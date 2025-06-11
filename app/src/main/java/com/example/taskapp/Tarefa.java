@@ -7,6 +7,7 @@ public class Tarefa {
     private String descricao;
     private String status;
     private Long dtcriacao;
+    private Long dtconclusao;
 
     public Tarefa() {}
 
@@ -36,4 +37,7 @@ public class Tarefa {
 
     public Long getDtcriacao() { return dtcriacao; }
     public void setDtcriacao(Long dtcriacao) { this.dtcriacao = dtcriacao; }
+
+    public Long getDtconclusao() { return dtconclusao; }
+    public void setDtconclusao(Long dtconclusao) { this.dtconclusao = dtconclusao; }
 }
