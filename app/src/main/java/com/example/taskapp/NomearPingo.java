@@ -29,9 +29,6 @@ public class NomearPingo extends AppCompatActivity {
         editTextNomePingo = findViewById(R.id.id_editPingoNome);
         nomear_seguirBtn = findViewById(R.id.nomear_seguirBtn);
 
-        //barra de navegacao
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        BottomNavHelper.setup(this, bottomNavigationView);
 
         // Receber o ID do usuário passado na Intent
         userId = getIntent().getStringExtra("userId");
