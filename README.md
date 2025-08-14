@@ -10,7 +10,6 @@
 
 <br/>
 
-## 📸 Screenshots
 
 
 > Pingo é um aplicativo de lista de tarefas (To-Do List) para Android, focado em uma experiência de usuário divertida e um design criativo. Gerencie suas tarefas diárias de uma forma mais leve e visualmente agradável. Este projeto foi desenvolvido em Java utilizando o Android Studio.
