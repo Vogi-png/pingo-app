@@ -28,6 +28,39 @@ https://github.com/user-attachments/assets/7811f58e-cfe1-4602-ad43-291b04da7bc4
 > Pingo é um aplicativo de lista de tarefas (To-Do List) para Android, focado em uma experiência de usuário divertida e um design criativo. Gerencie suas tarefas diárias de uma forma mais leve e visualmente agradável. Este projeto foi desenvolvido em Java utilizando o Android Studio.
 ---
 
+## ✨ Funcionalidades Principais
+
+* 🔐 **Autenticação Segura:** Tela de login para garantir que apenas usuários autorizados acessem o sistema.
+* 💻 **Gerenciamento:** Cadastro, edição, exclusão e consulta.
+* 🔍 **Busca Inteligente:** Ferramenta de pesquisa em todas as seções para encontrar registros rapidamente.
+
+---
+
+<br/>
+
+## 👩‍💻 Tecnologias Utilizadas
+* **Linguagem:** Java
+* **IDE:** Android Studio
+* **Banco de Dados:** Firebase
+* **UI/Layout:** XML com Material Design Components
+* **Design e Prototipagem:** Figma
+---
+
+<br/>
+
+## 🛠️ Ajustes e melhorias
+
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas para as seguintes tarefas:
+### Curto Prazo
+- [ ] **Implementar Tema Escuro:** Adicionar suporte para o modo escuro (Dark Mode).
+- [ ] **Suporte ao Modo Paisagem:** Adaptar os layouts para funcionar corretamente quando o dispositivo estiver deitado.
+- [ ] **Refinamento da UI (XML):** Realizar ajustes e correções nos arquivos de layout para aprimorar a interface.
+
+### Médio/Longo Prazo
+- [ ] **Versão para iOS:** Iniciar o desenvolvimento de uma versão do Pingo para a plataforma iOS.
+---
+
+<br/>
 
 ## 🤝 Colaboradores
 
