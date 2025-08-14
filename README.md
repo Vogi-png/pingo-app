@@ -10,17 +10,11 @@
 
 <br/>
 
-<div align="center">
-  
-### 🎥 Demonstração do Pingo
-
+## 🎥 Demonstração do Pingo
 Clique no vídeo abaixo para ver o aplicativo em ação.
-
-
+<div align="center">
 
 https://github.com/user-attachments/assets/7811f58e-cfe1-4602-ad43-291b04da7bc4
-
-
 
 </div>
 
