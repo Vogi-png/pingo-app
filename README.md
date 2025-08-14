@@ -6,7 +6,7 @@
 ![Tamanho do Repositório](https://img.shields.io/github/repo-size/Vogi-png/pingo-app?style=for-the-badge)
 ![Linguagens Utilizadas](https://img.shields.io/github/languages/count/Vogi-png/pingo-app?style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/Vogi-png/pingo-app?style=for-the-badge)
-[![Versão](https://img.shields.io/badge/Versão-0.0-blue?style=for-the-badge)](https://github.com/Vogi-png/pingo-app/releases)
+[![Versão](https://img.shields.io/badge/Versão-1.0.0-blue?style=for-the-badge)](https://github.com/Vogi-png/pingo-app/releases)
 
 <br/>
 
