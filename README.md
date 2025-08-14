@@ -25,8 +25,13 @@ https://github.com/user-attachments/assets/7811f58e-cfe1-4602-ad43-291b04da7bc4
 ## ✨ Funcionalidades Principais
 
 * 🔐 **Autenticação Segura:** Tela de login para garantir que apenas usuários autorizados acessem o sistema.
-* 💻 **Gerenciamento:** Cadastro, edição, exclusão e consulta.
-* 🔍 **Busca Inteligente:** Ferramenta de pesquisa em todas as seções para encontrar registros rapidamente.
+* 📝 **Cadastro de Usuário:** Tela para criação de novas contas de usuário.
+* ✅ **Gerenciamento de Tarefas:** Criação, edição, exclusão e visualização de histórico de tarefas.
+* ⭐️ **Funcionalidades Premium:** Acesso a recursos exclusivos através de uma assinatura paga.
+* 💳 **Gestão de Pagamentos:** Cadastro e exclusão de cartões para gerenciar a assinatura Premium.
+* ⭐️ **Funcionalidades Premium:** Acesso a recursos exclusivos através de uma assinatura paga.
+* 🎨 **Personalização:** Opções para personalizar a aparência (skin) e o nome do seu Pingo.
+* ✨ **Interface Criativa:** Design limpo e com micro-interações que tornam a organização mais agradável.
 
 ---
 
